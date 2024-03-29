@@ -35,6 +35,7 @@ public class JwtUtils {
         return Date.from(end.atZone(ZoneId.systemDefault()).toInstant());
     }
 
+    @Deprecated
     public static JwtToken createToken(String username, String role) {
         Date issuedAt = new Date();
         Date limit = toExpireDate(issuedAt);
@@ -51,6 +52,7 @@ public class JwtUtils {
         return new JwtToken(token);
     }
 
+    @Deprecated
     private static Claims getClaimsFromToken(String token) {
         try {
             return Jwts.parser()
