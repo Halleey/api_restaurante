@@ -19,6 +19,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 public class WebConfig {
 
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity  security) throws Exception {
         security
@@ -28,7 +29,7 @@ public class WebConfig {
                         authorize.
                                 requestMatchers(HttpMethod.GET, "/food" ).permitAll()
                                 .requestMatchers(HttpMethod.POST,"/public/**").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/food/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/food/**").hasAuthority("ROLE_ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/enter/**").permitAll()
                                 .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

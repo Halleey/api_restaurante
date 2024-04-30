@@ -8,7 +8,7 @@ public class JwtUserDetails extends User {
     private Users usuario;
 
     public JwtUserDetails(Users usuario) {
-        super(usuario.getName(), usuario.getPassword(), AuthorityUtils.createAuthorityList(usuario.getRole().name()));
+        super(usuario.getName(), usuario.getPassword(), AuthorityUtils.createAuthorityList(usuario.getRole().toString()));
         this.usuario = usuario;
     }
 
@@ -17,6 +17,6 @@ public class JwtUserDetails extends User {
     }
 
     public String getRole() {
-        return this.usuario.getRole().name();
+        return this.usuario.getRole().toString();
     }
 }
