@@ -25,6 +25,11 @@ public class Users {
     public enum Role {
         ROLE_ADMIN, ROLE_CLIENTE
     }
+
+    @ManyToOne
+    @JoinColumn(name = "mesa_id") // Nome da coluna que faz referência à mesa na tabela de usuários
+    private Mesa mesa;
+
     public Users(String name, String lastName, String password, String email) {
         this.name = name;
         this.lastName = lastName;

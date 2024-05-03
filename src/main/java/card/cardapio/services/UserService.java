@@ -2,6 +2,7 @@ package card.cardapio.services;
 
 import card.cardapio.dto.user.UserRequestDto;
 import card.cardapio.entitie.Users;
+import card.cardapio.repositories.MesaRepository;
 import card.cardapio.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +16,13 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository repository;
     private final BCryptPasswordEncoder passwordEncoder;
-
+    private final MesaRepository mesaRepository;
     @Autowired
-    public UserService(UserRepository repository, BCryptPasswordEncoder passwordEncoder) {
+    public UserService(UserRepository repository, BCryptPasswordEncoder passwordEncoder, MesaRepository mesaRepository) {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
+        //terminar
+        this.mesaRepository= mesaRepository;
     }
 
     public void saveUser(UserRequestDto requestDTO) {

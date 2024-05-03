@@ -38,6 +38,7 @@ public class WebConfig {
                         UsernamePasswordAuthenticationFilter.class);
 
         return security.build();
+
     }
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
