@@ -23,4 +23,9 @@ public class UserController {
     public void associarUsuarioAMesa(@PathVariable Long userId, @PathVariable Long mesaId) {
         userService.associarUsuarioAMesa(userId, mesaId);
     }
+
+    @PatchMapping("user/{userId}/mesa")
+    public void desassociarMesa(@PathVariable Long  userId) {
+        userService.desassociarUsuarioDeMesa(userId);
+    }
 }

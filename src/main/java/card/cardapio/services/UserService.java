@@ -52,6 +52,13 @@ public class UserService {
         user.setMesa(mesa);
         repository.save(user);
     }
+    public void desassociarUsuarioDeMesa(Long userId) {
+        Users user = repository.findById(userId)
+                .orElseThrow(()
+                        -> new EntityNotFoundException("Usuário não encontrado com o ID: " + userId));
+        user.setMesa(null);
+        repository.save(user);
+    }
     public Users.Role buscarPorRoleUser(String name) {
         return repository.findByRoleUser(name);
     }
