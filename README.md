@@ -17,5 +17,6 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Entity "mesa"
 - [x] Associar usuários a mesa
 - [x] desassociar usuários de uma mesa
-- [ ]   
+- [ ] Comentários de usuários
+- [ ] Recuperação de conta   
 
