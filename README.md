@@ -13,5 +13,9 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Crud de comida
 - [x] Crud de usuarios 
 - [x] Criptografia de senha de usuários
-- [x] tokens jwt 
+- [x] tokens jwt
+- [x] Entity "mesa"
+- [x] Associar usuários a mesa
+- [x] desassociar usuários de uma mesa
+- [ ]   
 
