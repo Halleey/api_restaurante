@@ -29,6 +29,7 @@ public class WebConfig {
                         authorize.
                                 requestMatchers(HttpMethod.GET, "/food" ).permitAll()
                                 .requestMatchers(HttpMethod.POST,"/public/**").permitAll()
+                                .requestMatchers(HttpMethod.PATCH,"/public/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/food/**").hasAuthority("ROLE_ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/enter/**").permitAll()
                                 .anyRequest().authenticated())

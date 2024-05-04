@@ -19,4 +19,8 @@ public class UserController {
         userService.saveUser(requestDTO);
     }
 
+    @PatchMapping("/user/{userId}/mesa/{mesaId}")
+    public void associarUsuarioAMesa(@PathVariable Long userId, @PathVariable Long mesaId) {
+        userService.associarUsuarioAMesa(userId, mesaId);
+    }
 }

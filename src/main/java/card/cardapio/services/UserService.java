@@ -1,6 +1,7 @@
 package card.cardapio.services;
 
 import card.cardapio.dto.user.UserRequestDto;
+import card.cardapio.entitie.Mesa;
 import card.cardapio.entitie.Users;
 import card.cardapio.repositories.MesaRepository;
 import card.cardapio.repositories.UserRepository;
@@ -43,6 +44,14 @@ public class UserService {
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Usuário não encontrado para o nome: " + name)));
     }
 
+    public void associarUsuarioAMesa(Long userId, Long mesaId) {
+        Users user = repository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com o ID: " + userId));
+        Mesa mesa = mesaRepository.findById(mesaId).orElseThrow(()
+                -> new EntityNotFoundException("Mesa não encoontrada" + mesaId));
+        user.setMesa(mesa);
+        repository.save(user);
+    }
     public Users.Role buscarPorRoleUser(String name) {
         return repository.findByRoleUser(name);
     }
