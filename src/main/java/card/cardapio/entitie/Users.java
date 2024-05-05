@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -25,6 +28,9 @@ public class Users {
     public enum Role {
         ROLE_ADMIN, ROLE_CLIENTE
     }
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    private List<Comments> comentarios;
 
     @ManyToOne
     @JoinColumn(name = "mesa_id") // Nome da coluna que faz referência à mesa na tabela de usuários

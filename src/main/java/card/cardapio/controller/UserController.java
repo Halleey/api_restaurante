@@ -1,4 +1,5 @@
 package card.cardapio.controller;
+import card.cardapio.dto.comments.ComentarioRequestDto;
 import card.cardapio.dto.user.UserRequestDto;
 import card.cardapio.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,5 +28,9 @@ public class UserController {
     @PatchMapping("user/{userId}/mesa")
     public void desassociarMesa(@PathVariable Long  userId) {
         userService.desassociarUsuarioDeMesa(userId);
+    }
+    @PostMapping("/comments")
+    public void salvarComentario(@RequestBody ComentarioRequestDto dto) {
+        
     }
 }

@@ -52,6 +52,7 @@ public class UserService {
         user.setMesa(mesa);
         repository.save(user);
     }
+
     public void desassociarUsuarioDeMesa(Long userId) {
         Users user = repository.findById(userId)
                 .orElseThrow(()
