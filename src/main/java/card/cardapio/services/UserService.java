@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,6 +44,11 @@ public class UserService {
         return repository.findByName(name)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Usuário não encontrado para o nome: " + name)));
     }
+
+    public List<Mesa> getMesas() {
+        return mesaRepository.findAll();
+    }
+
 
     public void associarUsuarioAMesa(Long userId, Long mesaId) {
         Users user = repository.findById(userId)

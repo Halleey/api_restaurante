@@ -29,8 +29,8 @@ public class Users {
         ROLE_ADMIN, ROLE_CLIENTE
     }
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private List<Comments> comentarios;
+//    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+//    private List<Comments> comentarios;
 
     @ManyToOne
     @JoinColumn(name = "mesa_id") // Nome da coluna que faz referência à mesa na tabela de usuários
@@ -42,4 +42,5 @@ public class Users {
         this.password = password;
         this.email = email;
     }
+
 }
