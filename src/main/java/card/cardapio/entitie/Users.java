@@ -29,12 +29,8 @@ public class Users {
         ROLE_ADMIN, ROLE_CLIENTE
     }
 
-//    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-//    private List<Comments> comentarios;
-
-    @ManyToOne
-    @JoinColumn(name = "mesa_id") // Nome da coluna que faz referência à mesa na tabela de usuários
-    private Mesa mesa;
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    private List<Mesa> mesas;
 
     public Users(String name, String lastName, String password, String email) {
         this.name = name;

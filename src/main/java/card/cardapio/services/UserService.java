@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,17 +54,19 @@ public class UserService {
     public void associarUsuarioAMesa(Long userId, Long mesaId) {
         Users user = repository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado com o ID: " + userId));
-        Mesa mesa = mesaRepository.findById(mesaId).orElseThrow(()
-                -> new EntityNotFoundException("Mesa não encoontrada" + mesaId));
-        user.setMesa(mesa);
-        repository.save(user);
+        Mesa mesa = mesaRepository.findById(mesaId)
+                .orElseThrow(() -> new EntityNotFoundException("Mesa não encontrada com o ID: " + mesaId));
+
+        mesa.setCliente(user);
+        mesaRepository.save(mesa);
     }
+
 
     public void desassociarUsuarioDeMesa(Long userId) {
         Users user = repository.findById(userId)
                 .orElseThrow(()
                         -> new EntityNotFoundException("Usuário não encontrado com o ID: " + userId));
-        user.setMesa(null);
+        user.setMesas(null);
         repository.save(user);
     }
     public Users.Role buscarPorRoleUser(String name) {

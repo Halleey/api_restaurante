@@ -23,18 +23,12 @@ public class UserController {
         userService.saveUser(requestDTO);
     }
 
-    @PatchMapping("/user/{userId}/mesa/{mesaId}")
-    public void associarUsuarioAMesa(@PathVariable Long userId, @PathVariable Long mesaId) {
+    @PatchMapping("/{mesaId}/user/{userId}")
+    public void associarMesaAoUsuario(@PathVariable Long mesaId, @PathVariable Long userId) {
         userService.associarUsuarioAMesa(userId, mesaId);
     }
     @PatchMapping("user/{userId}/mesa")
     public void desassociarMesa(@PathVariable Long  userId) {
         userService.desassociarUsuarioDeMesa(userId);
     }
-
-    @GetMapping("/mesasfree")
-    public List<Mesa> getAllMesas() {
-        return userService.getMesas();
-    }
-
 }
