@@ -25,4 +25,14 @@ public class MesaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         }
     }
+
+    @PatchMapping("/user/{userId}/mesa/{mesaId}")
+    public ResponseEntity<String> removerMesaDoUsuario(@PathVariable Long userId, @PathVariable Long mesaId) {
+        try {
+            mesaService.removerMesa(userId, mesaId);
+            return ResponseEntity.ok("Mesa removida do usuário com sucesso.");
+        } catch (EntityNotFoundException | IllegalArgumentException ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+        }
+    }
 }

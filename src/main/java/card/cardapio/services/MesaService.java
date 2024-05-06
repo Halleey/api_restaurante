@@ -33,4 +33,11 @@ public class MesaService {
         this.repository.save(mesa);
     }
 
+    public void removerMesa(Long userId, Long mesaId) {
+        Mesa mesa = repository.findById(mesaId).orElseThrow(() -> new EntityNotFoundException("mesa não encontrada"));
+
+        mesa.setCliente(null);
+        repository.save(mesa);
+    }
+
 }
