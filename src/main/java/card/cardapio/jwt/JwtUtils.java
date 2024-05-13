@@ -36,13 +36,14 @@ public class JwtUtils {
     }
 
     @Deprecated
-    public static JwtToken createToken(String username, String role) {
+    public static JwtToken createToken(String username,Long userId, String role) {
         Date issuedAt = new Date();
         Date limit = toExpireDate(issuedAt);
 
         String token = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setSubject(username)
+                .claim("userId", userId)
                 .setIssuedAt(issuedAt)
                 .setExpiration(limit)
                 .signWith(generateKey(), SignatureAlgorithm.HS256)

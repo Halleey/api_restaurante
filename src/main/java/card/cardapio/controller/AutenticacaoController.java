@@ -31,7 +31,7 @@ public class AutenticacaoController {
                     new UsernamePasswordAuthenticationToken(dto.getName(), dto.getPassword());
 
             authenticationManager.authenticate(authenticationToken);
-
+            
             JwtToken token = detailsService.getTokenAuthenticated(dto.getName());
 
             return ResponseEntity.ok(token);

@@ -13,7 +13,7 @@ public class MesaDto {
     private Long mesaId;
     @Getter
     @Setter
+    private String userName;
     private Long userId;
-
     private UserRequestDto userRequestDto;
 }
