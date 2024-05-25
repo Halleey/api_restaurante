@@ -28,10 +28,6 @@ public class Users {
     public enum Role {
         ROLE_ADMIN, ROLE_CLIENTE
     }
-
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<Mesa> mesas;
-
     public Users(String name, String lastName, String password, String email) {
         this.name = name;
         this.lastName = lastName;

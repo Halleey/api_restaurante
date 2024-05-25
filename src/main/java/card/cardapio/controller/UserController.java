@@ -1,13 +1,8 @@
 package card.cardapio.controller;
 import card.cardapio.dto.user.UserRequestDto;
-import card.cardapio.entitie.Mesa;
-import card.cardapio.entitie.Users;
 import card.cardapio.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("public")
