@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,6 +34,11 @@ public class Users {
         this.lastName = lastName;
         this.password = password;
         this.email = email;
+
     }
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    private List<Address> addresses = new ArrayList<>();
+
 
 }
