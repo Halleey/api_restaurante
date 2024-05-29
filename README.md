@@ -14,6 +14,8 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Crud de usuarios.
 - [x] Criptografia de senha de usuários.
 - [x] tokens jwt.
+- [x] Permissão de rotas.
+- [x] Crud "comida" somente para admin.
 - [x] Entity "Address".
 - [x] Associar um endereço ao usuário.
 - [x] Excluir um endereço. 
