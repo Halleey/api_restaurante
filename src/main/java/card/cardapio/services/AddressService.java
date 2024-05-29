@@ -19,20 +19,24 @@ public class AddressService {
         this.userRepository = userRepository;
     }
 
-    public Address saveAddress(Long userId, AddressDTO addressDTO) {
+    public void saveAddress(Long userId, AddressDTO addressDTO) {
         Users users = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
         Address addres = new Address();
         addres.setAddress(addressDTO.getAddress());
         addres.setNumero(addressDTO.getNumero());
         addres.setUsers(users);
-        return repository.save(addres);
+        repository.save(addres);
     }
 
     public List<Address> getAddressAll() {
         return  repository.findAll();
     }
 
-
+    public void removeAddress(Long userId, AddressDTO addressDTO) {
+        Users users = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
+        Address address = repository.findByUsersAndAddressAndNumero(users, addressDTO.getAddress(), addressDTO.getNumero());
+        repository.delete(address);
+    }
 }
 

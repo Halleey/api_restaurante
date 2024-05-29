@@ -32,6 +32,7 @@ public class WebConfig {
                                 .requestMatchers(HttpMethod.POST,"/public/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/food/**").hasAuthority("ROLE_ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/enter/**").permitAll()
+                                .requestMatchers(HttpMethod.DELETE,"/public/**").permitAll()
                                 .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin(AbstractHttpConfigurer::disable)
