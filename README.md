@@ -10,13 +10,12 @@ API de restaurante oferece uma plataforma flexível para a gestão de cardápios
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas:
 
-- [x] Crud de comida
-- [x] Crud de usuarios 
-- [x] Criptografia de senha de usuários
-- [x] tokens jwt
-- [x] Entity "mesa"
-- [x] Associar usuários a mesa
-- [x] desassociar usuários de uma mesa
-- [ ] Comentários de usuários
-- [ ] Recuperação de conta   
+- [x] Crud de comida.
+- [x] Crud de usuarios.
+- [x] Criptografia de senha de usuários.
+- [x] tokens jwt.
+- [x] Entity "Address".
+- [x] Associar um endereço ao usuário.
+- [x] Excluir um endereço. 
+- [ ] Recuperar usuário.
 
