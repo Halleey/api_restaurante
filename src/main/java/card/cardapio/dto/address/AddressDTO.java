@@ -2,16 +2,16 @@ package card.cardapio.dto.address;
 
 public class AddressDTO {
     private String address;
-    private String numero;
+    private String number;
     private Long userId;
 
 
     public AddressDTO() {
     }
 
-    public AddressDTO(String address, String numero,Long userId) {
+    public AddressDTO(String address, String number,Long userId) {
         this.address = address;
-        this.numero = numero;
+        this.number = number;
         this.userId = userId;
     }
 
@@ -31,11 +31,11 @@ public class AddressDTO {
         this.address = address;
     }
 
-    public String getNumero() {
-        return numero;
+    public String getNumber() {
+        return number;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setNumber(String number) {
+        this.number = number;
     }
 }

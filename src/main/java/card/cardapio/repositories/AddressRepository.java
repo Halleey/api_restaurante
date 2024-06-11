@@ -5,5 +5,5 @@ import card.cardapio.entitie.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AddressRepository extends JpaRepository<Address, Long> {
-    Address findByUsersAndAddressAndNumero(Users users, String address, String numero);
+    Address findByUsersAndAddressAndNumero(Users users, String address, String number);
 }

@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("public")
 public class UserController {
     private final UserService userService;
     private final AddressService addressService;
+
     @Autowired
     public UserController(UserService userService, AddressService addressService) {
         this.userService = userService;
@@ -25,17 +25,19 @@ public class UserController {
     public void saveUser(@RequestBody UserRequestDto requestDTO) {
         userService.saveUser(requestDTO);
     }
+
     @PostMapping("/address")
-    public void saveAddress(@RequestBody AddressRequestDto addressRequestDto) {
-        addressService.saveAddress(addressRequestDto.getUserId(), addressRequestDto.getAddressDTO());
-    }
-    @DeleteMapping
-    public void removeAddress(@RequestBody AddressRequestDto addressRequestDto) {
-        addressService.removeAddress(addressRequestDto.getUserId(), addressRequestDto.getAddressDTO());
-    }
-    @GetMapping
-    public List<Address> getaAllAddress() {
-       return addressService.getAddressAll();
+    public void saveAddress(@RequestBody AddressDTO addressDTO, @RequestHeader("userId") Long userId) {
+        addressService.saveAddress(userId, addressDTO);
     }
 
+    @DeleteMapping("/address")
+    public void removeAddress(@RequestBody AddressDTO addressDTO, @RequestHeader("userId") Long userId) {
+        addressService.removeAddress(userId, addressDTO);
+    }
+
+    @GetMapping("/address")
+    public List<Address> getAllAddress() {
+        return addressService.getAddressAll();
+    }
 }

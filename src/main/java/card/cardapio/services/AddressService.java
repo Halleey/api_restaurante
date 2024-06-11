@@ -22,20 +22,19 @@ public class AddressService {
     public void saveAddress(Long userId, AddressDTO addressDTO) {
         Users users = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
-        Address addres = new Address();
-        addres.setAddress(addressDTO.getAddress());
-        addres.setNumero(addressDTO.getNumero());
-        addres.setUsers(users);
-        repository.save(addres);
+        Address address = new Address();
+        address.setAddress(addressDTO.getAddress());
+        address.setNumero(addressDTO.getNumber());
+        address.setUsers(users);
+        repository.save(address);
     }
-
     public List<Address> getAddressAll() {
         return  repository.findAll();
     }
 
     public void removeAddress(Long userId, AddressDTO addressDTO) {
         Users users = userRepository.findById(userId).orElseThrow(() -> new EntityNotFoundException("User not found"));
-        Address address = repository.findByUsersAndAddressAndNumero(users, addressDTO.getAddress(), addressDTO.getNumero());
+        Address address = repository.findByUsersAndAddressAndNumero(users, addressDTO.getAddress(), addressDTO.getNumber());
         repository.delete(address);
     }
 }
