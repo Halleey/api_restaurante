@@ -98,7 +98,8 @@ public class UserService {
             throw new IllegalArgumentException("Token inválido para o e-mail fornecido.");
         }
         String encryptedPassword = passwordEncoder.encode(novaSenha);
-        user.setPassword(encryptedPassword);
+        user.setPassword(encryptedPassword
+        );
         repository.save(user);
         tokenService.deleteToken(tokenReset);
 
