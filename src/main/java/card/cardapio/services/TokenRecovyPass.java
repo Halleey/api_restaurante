@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
 @Service
 public class TokenRecovyPass {
     private static final int EXPIRATION_HOURS = 24;
@@ -16,6 +15,7 @@ public class TokenRecovyPass {
     public TokenRecovyPass(TokenRepository tokenRepository) {
         this.tokenRepository = tokenRepository;
     }
+
     public TokenReset createToken(Users users) {
         String token = UUID.randomUUID().toString();
         LocalDateTime expiryDate = LocalDateTime.now().plusHours(EXPIRATION_HOURS);
@@ -27,11 +27,16 @@ public class TokenRecovyPass {
 
         return tokenRepository.save(tokenReset);
     }
+
     public TokenReset findByToken(String token) {
         return tokenRepository.findByToken(token);
     }
 
     public void deleteToken(TokenReset token) {
         tokenRepository.delete(token);
+    }
+
+    public boolean isTokenExpired(TokenReset tokenReset) {
+        return tokenReset.getExpiryDate().isBefore(LocalDateTime.now());
     }
 }

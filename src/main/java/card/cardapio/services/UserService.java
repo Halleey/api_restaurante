@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Optional;
 
 @Service
@@ -21,7 +20,11 @@ public class UserService {
     private final  EmailService emailService;
     private final TokenRecovyPass tokenService;
     @Autowired
-    public UserService(UserRepository repository, BCryptPasswordEncoder passwordEncoder, AddressRepository addressRepository, EmailService emailService,TokenRecovyPass tokenService) {
+    public UserService(UserRepository repository,
+                       BCryptPasswordEncoder passwordEncoder,
+                       AddressRepository addressRepository,
+                       EmailService emailService,TokenRecovyPass tokenService)
+    {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
         this.addressRepository = addressRepository;
@@ -75,5 +78,29 @@ public class UserService {
                 + tokenReset.getToken();
 
         emailService.enviarEmail(destinatario, assunto, mensagem);
+    }
+    public void alterPassword(String email, String token, String novaSenha) throws Exception {
+        Users user = repository.findByEmail(email);
+        if (user == null) {
+            throw new Exception("Usuário não encontrado");
+        }
+
+        TokenReset tokenReset = tokenService.findByToken(token);
+        if (tokenReset == null) {
+            throw new IllegalArgumentException("Token não é válido");
+        }
+
+        if (tokenService.isTokenExpired(tokenReset)) {
+            throw new IllegalArgumentException("Token inválido ou expirado.");
+        }
+
+        if (!tokenReset.getUser().getEmail().equals(email)) {
+            throw new IllegalArgumentException("Token inválido para o e-mail fornecido.");
+        }
+        String encryptedPassword = passwordEncoder.encode(novaSenha);
+        user.setPassword(encryptedPassword);
+        repository.save(user);
+        tokenService.deleteToken(tokenReset);
+
     }
 }

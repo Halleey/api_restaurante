@@ -53,17 +53,6 @@ public class WebConfig {
         return new JwtAuthorizationFilter();
     }
 
-
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("*");
-        configuration.addAllowedMethod("*");
-        configuration.addAllowedHeader("*");
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authentication) throws Exception {
         return  authentication.getAuthenticationManager();

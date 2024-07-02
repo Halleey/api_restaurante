@@ -20,6 +20,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("public")
+@CrossOrigin("http://localhost:5173")
 @Validated
 public class UserController {
     private final UserService userService;
@@ -77,5 +78,18 @@ public class UserController {
 
         String result = emailService.enviarEmail(email, subject, message);
         return ResponseEntity.ok(result);
+    }
+    @PostMapping("/change-password")
+    public ResponseEntity<String> changePassword(@RequestBody Map<String, String> requestBody) {
+        String email = requestBody.get("email");
+        String token = requestBody.get("token");
+        String newPassword = requestBody.get("newPassword");
+
+        try {
+            userService.alterPassword(email, token, newPassword);
+            return ResponseEntity.ok("Senha alterada com sucesso");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

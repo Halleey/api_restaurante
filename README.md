@@ -19,5 +19,5 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Entity "Address".
 - [x] Associar um endereço ao usuário.
 - [x] Excluir um endereço. 
-- [ ] Recuperar usuário.
+- [ ] Recuperar senha do usuário.
 
