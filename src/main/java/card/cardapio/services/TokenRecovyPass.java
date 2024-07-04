@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 @Service
 public class TokenRecovyPass {
-    private static final int EXPIRATION_HOURS = 24;
+    private static final int EXPIRATION_MINUTES = 10;
     private final TokenRepository tokenRepository;
 
     public TokenRecovyPass(TokenRepository tokenRepository) {
@@ -18,7 +18,7 @@ public class TokenRecovyPass {
 
     public TokenReset createToken(Users users) {
         String token = UUID.randomUUID().toString();
-        LocalDateTime expiryDate = LocalDateTime.now().plusHours(EXPIRATION_HOURS);
+        LocalDateTime expiryDate = LocalDateTime.now().plusMinutes(EXPIRATION_MINUTES);
 
         TokenReset tokenReset = new TokenReset();
         tokenReset.setToken(token);
