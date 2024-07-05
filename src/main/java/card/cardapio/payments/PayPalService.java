@@ -1,5 +1,4 @@
 package card.cardapio.payments;
-
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
@@ -9,9 +8,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
-@Service
 @RequiredArgsConstructor
+@Service
 public class PayPalService {
 
     private final APIContext apiContext;
@@ -24,10 +22,10 @@ public class PayPalService {
             String description,
             String cancelUrl,
             String successUrl
-    ) throws PayPalRESTException{
+    ) throws PayPalRESTException {
         Amount amount = new Amount();
         amount.setCurrency(currency);
-        amount.setTotal(String.format(Locale.forLanguageTag(currency), "%.2F"));
+        amount.setTotal(String.format(Locale.US, "%.2f", total));
 
         Transaction transaction = new Transaction();
         transaction.setDescription(description);
@@ -50,7 +48,12 @@ public class PayPalService {
 
         payment.setRedirectUrls(redirectUrls);
 
-        return payment.create(apiContext);
+        Payment createdPayment = payment.create(apiContext);
+
+        // Logging the payment details to help with debugging
+        System.out.println("Created Payment: " + createdPayment);
+
+        return createdPayment;
     }
 
     public Payment executePayment(
@@ -62,7 +65,6 @@ public class PayPalService {
 
         PaymentExecution paymentExecution = new PaymentExecution();
         paymentExecution.setPayerId(payerId);
-        return  payment.execute(apiContext, paymentExecution);
+        return payment.execute(apiContext, paymentExecution);
     }
-
 }

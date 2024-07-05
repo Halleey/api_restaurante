@@ -11,15 +11,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
 @EnableWebSecurity
 @Configuration
 public class WebConfig {
-
-
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity  security) throws Exception {
@@ -33,6 +27,7 @@ public class WebConfig {
                                 .requestMatchers(HttpMethod.POST, "/food/**").hasAuthority("ROLE_ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/enter/**").permitAll()
                                 .requestMatchers(HttpMethod.DELETE,"/public/**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/paypal/**").permitAll()
                                 .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .formLogin(AbstractHttpConfigurer::disable)
