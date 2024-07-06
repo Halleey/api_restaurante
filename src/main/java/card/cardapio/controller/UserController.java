@@ -79,7 +79,8 @@ public class UserController {
         String result = emailService.enviarEmail(email, subject, message);
         return ResponseEntity.ok(result);
     }
-    @PostMapping("/change-password")
+
+    @PatchMapping("/change-password")
     public ResponseEntity<String> changePassword(@RequestBody Map<String, String> requestBody) {
         String email = requestBody.get("email");
         String token = requestBody.get("token");

@@ -1,23 +1,27 @@
 package card.cardapio;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.JsonNode;
+import card.cardapio.controller.UserController;
+import card.cardapio.dto.address.AddressDTO;
+import card.cardapio.dto.user.UserRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.Data;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import javax.print.attribute.standard.Media;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -27,42 +31,54 @@ public class CardapioApplicationTests {
     @Autowired
     private MockMvc mockMvc;
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    @Autowired
+    private WebApplicationContext webApplicationContext;
 
-    @Test
-    public void testCreatePaymentEndpoint() throws Exception {
-        // Preparar o payload da requisição
-        PaymentRequest paymentRequest = new PaymentRequest(100.0, "BRL", "paypal", "sale", "Test payment");
-        String jsonPayload = objectMapper.writeValueAsString(paymentRequest);
+    @InjectMocks
+    private UserController controller;
 
-        // Executar a requisição POST para /paypal/create-payment
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/paypal/create-payment")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(jsonPayload))
-                .andExpect(MockMvcResultMatchers.status().isOk()) // Verificar se o status HTTP é 200 OK
-                .andReturn();
-
-        // Verificar se o JSON de resposta contém um campo 'id'
-        String jsonResponse = mvcResult.getResponse().getContentAsString();
-        JsonNode jsonNode = objectMapper.readTree(jsonResponse);
-        assertTrue(jsonNode.has("id"));
+    @BeforeEach
+    public void setup() {
+        MockitoAnnotations.openMocks(this);
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
-    // Classe interna para representar o payload da requisição
-    @Data
-    static class PaymentRequest {
-        @JsonProperty private double total;
-        @JsonProperty private String currency;
-        @JsonProperty private String method;
-        @JsonProperty private String intent;
-        @JsonProperty private String description;
+    @Test
+    public void testSaveUser() throws Exception {
+        // Dados do usuário para o teste
+        UserRequestDto userRequestDto = new UserRequestDto("John",
+                "Doe", "password123",
+                "testando@gmail.com", 1L);
+        mockMvc.perform(post("/public")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(userRequestDto)))
+                .andExpect(status().isOk());
 
-        public PaymentRequest(double total, String currency, String method, String intent, String description) {
-            this.total = total;
-            this.currency = currency;
-            this.method = method;
-            this.intent = intent;
-            this.description = description;
+    }
+    @Test
+    public void testSaveAdddres() throws Exception {
+        AddressDTO addressDTO = new AddressDTO("Rua Teste", "14", 1L);
+        mockMvc.perform(post("/public/address")
+                        .header("userId", "1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(addressDTO)))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testExcludeAddress() throws  Exception {
+        AddressDTO addressDTO = new AddressDTO("Rua Teste", "14", 1L);
+        mockMvc.perform(delete("/public/address")
+                .header("userId", "1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(addressDTO))).andExpect(status().isOk());
+    }
+
+    private static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

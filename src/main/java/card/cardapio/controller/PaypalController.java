@@ -1,8 +1,6 @@
 package card.cardapio.controller;
-
 import java.util.HashMap;
 import java.util.List;
-
 import card.cardapio.entitie.Paypal;
 import card.cardapio.repositories.PaymentRepository;
 import org.springframework.http.HttpStatus;
@@ -11,19 +9,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
-
 import card.cardapio.dto.paypal.PaymentDTO;
-import card.cardapio.dto.paypal.PaymentResponse;
 import card.cardapio.payments.PayPalService;
-import card.cardapio.repositories.UserRepository;
-import card.cardapio.services.EmailService;
-import card.cardapio.services.UserService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -33,9 +24,6 @@ import lombok.RequiredArgsConstructor;
 public class PaypalController {
 
     private final PayPalService payPalService;
-    private final UserService service;
-    private final EmailService emailService;
-    private final UserRepository repository;
     private final PaymentRepository paymentRepository;
 
     @PostMapping("/create-payment")
@@ -91,13 +79,5 @@ public class PaypalController {
         return paymentEntity;
     }
 
-    @PostMapping("/execute-payment")
-    public ResponseEntity<?> executePayment(@RequestParam String paymentId, @RequestParam String payerId) {
-        try {
-            Payment payment = payPalService.executePayment(paymentId, payerId);
-            return ResponseEntity.ok(new PaymentResponse(payment));
-        } catch (PayPalRESTException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-        }
-    }
+
 }
