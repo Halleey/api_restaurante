@@ -1,17 +1,17 @@
 package card.cardapio.jwt;
 
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
-
-import java.nio.charset.StandardCharsets;
-import java.security.Key;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 @Slf4j
 public class JwtUtils {
 
@@ -36,7 +36,7 @@ public class JwtUtils {
     }
 
     @Deprecated
-    public static JwtToken createToken(String username,Long userId, String role) {
+    public static JwtToken createToken(String username,Long userId, String role, String email) {
         Date issuedAt = new Date();
         Date limit = toExpireDate(issuedAt);
 
@@ -47,7 +47,8 @@ public class JwtUtils {
                 .setIssuedAt(issuedAt)
                 .setExpiration(limit)
                 .signWith(generateKey(), SignatureAlgorithm.HS256)
-                .claim("role", role)
+                .claim("role", role).
+                claim("email", email)
                 .compact();
 
         return new JwtToken(token);
@@ -87,4 +88,6 @@ public class JwtUtils {
         }
         return token;
     }
+
+
 }
