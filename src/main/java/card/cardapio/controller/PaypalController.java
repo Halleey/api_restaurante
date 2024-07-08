@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import card.cardapio.dto.paypal.PaymentResponse;
 import card.cardapio.entitie.Paypal;
 import card.cardapio.entitie.Users;
 import card.cardapio.repositories.PaymentRepository;
@@ -29,6 +30,15 @@ public class PaypalController {
         this.payPalService = payPalService;
         this.paymentRepository = paymentRepository;
         this.userService = userService;
+    }
+
+    @GetMapping("/completed-payments")
+    public ResponseEntity<?> getAllCompletedPayments() {
+        List<Paypal> completedPayments = paymentRepository.findAllCompletedPayments();
+        if (completedPayments.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No completed payments found.");
+        }
+        return ResponseEntity.ok(completedPayments);
     }
 
     @PostMapping("/create-payment")
@@ -93,7 +103,7 @@ public class PaypalController {
         try {
             Payment payment = payPalService.executePayment(paymentId, payerId);
             if (payment.getState().equals("approved")) {
-                Paypal paymentEntity = getPaypal(payment, null); // Assuming approvalUrl is not needed here
+                Paypal paymentEntity = getPaypal(payment, null);
                 paymentRepository.save(paymentEntity);
                 return ResponseEntity.ok("Payment approved");
             } else {

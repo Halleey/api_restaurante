@@ -1,4 +1,6 @@
 package card.cardapio.payments;
+import card.cardapio.entitie.Paypal;
+import card.cardapio.repositories.PaymentRepository;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
@@ -12,9 +14,11 @@ import java.util.Locale;
 public class PayPalService {
 
     private final APIContext apiContext;
+    private final PaymentRepository repository;
 
-    public PayPalService(APIContext apiContext) {
+    public PayPalService(APIContext apiContext, PaymentRepository repository) {
         this.apiContext = apiContext;
+        this.repository = repository;
     }
 
     public Payment createPayment(
@@ -53,7 +57,6 @@ public class PayPalService {
 
         Payment createdPayment = payment.create(apiContext);
 
-        // Logging the payment details for debugging purposes
         System.out.println("Created Payment: " + createdPayment);
 
         return createdPayment;
@@ -70,4 +73,9 @@ public class PayPalService {
         paymentExecution.setPayerId(payerId);
         return payment.execute(apiContext, paymentExecution);
     }
+
+   public List<Paypal> getAll() {
+        return  repository.findAllCompletedPayments();
+   }
+
 }

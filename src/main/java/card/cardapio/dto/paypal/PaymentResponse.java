@@ -7,6 +7,15 @@ public class PaymentResponse {
     private String state;
     private String createTime;
     private String updateTime;
+    private String userId;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public PaymentResponse(Payment payment) {
         this.id = payment.getId();

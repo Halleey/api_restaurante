@@ -23,6 +23,7 @@ public class WebConfig {
                 authorizeHttpRequests(authorize ->
                         authorize.
                                 requestMatchers(HttpMethod.GET, "/food" ).permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/paypal/completed-payments").permitAll()
                                 .requestMatchers(HttpMethod.POST,"/public/**").permitAll()
                                 .requestMatchers(HttpMethod.PATCH,"/public/**").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/food/**").hasAuthority("ROLE_ADMIN")
