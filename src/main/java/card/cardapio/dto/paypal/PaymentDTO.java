@@ -8,6 +8,15 @@ public class PaymentDTO {
     private String description;
     private String cancelUrl;
     private String successUrl;
+    private Long userId;
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 
     public double getTotal() {
         return total;

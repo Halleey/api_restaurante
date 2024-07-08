@@ -2,17 +2,20 @@ package card.cardapio.payments;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
-import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-@RequiredArgsConstructor
 @Service
 public class PayPalService {
 
     private final APIContext apiContext;
+
+    public PayPalService(APIContext apiContext) {
+        this.apiContext = apiContext;
+    }
 
     public Payment createPayment(
             double total,
@@ -34,7 +37,7 @@ public class PayPalService {
         List<Transaction> transactions = new ArrayList<>();
         transactions.add(transaction);
 
-        Payer payer = new Payer();
+        com.paypal.api.payments.Payer payer = new com.paypal.api.payments.Payer();
         payer.setPaymentMethod(method);
 
         Payment payment = new Payment();
@@ -50,7 +53,7 @@ public class PayPalService {
 
         Payment createdPayment = payment.create(apiContext);
 
-        // Logging the payment details to help with debugging
+        // Logging the payment details for debugging purposes
         System.out.println("Created Payment: " + createdPayment);
 
         return createdPayment;

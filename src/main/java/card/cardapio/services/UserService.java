@@ -103,5 +103,7 @@ public class UserService {
         repository.save(user);
         tokenService.deleteToken(tokenReset);
     }
-
+    public Optional<Users> findById(Long userId) {
+        return  repository.findById(userId);
+    }
 }

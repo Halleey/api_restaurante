@@ -1,23 +1,42 @@
 package card.cardapio.entitie;
 
 import jakarta.persistence.*;
-
-@Entity(name = "paypal")
+@Entity
 @Table(name = "paypal")
 public class Paypal {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "payment_id")
     private String paymentId;
+
     private String intent;
     private String paymentMethod;
     private String state;
+
+    @Column(name = "create_time")
     private String createTime;
+
     private String currency;
     private String total;
     private String description;
+
+    @Column(name = "approval_url")
     private String approvalUrl;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private Users users;
+
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
 
     public Long getId() {
         return id;

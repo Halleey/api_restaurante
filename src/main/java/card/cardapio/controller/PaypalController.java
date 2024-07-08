@@ -1,8 +1,12 @@
 package card.cardapio.controller;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
+
 import card.cardapio.entitie.Paypal;
+import card.cardapio.entitie.Users;
 import card.cardapio.repositories.PaymentRepository;
+import card.cardapio.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,15 +16,20 @@ import com.paypal.base.rest.PayPalRESTException;
 import card.cardapio.dto.paypal.PaymentDTO;
 import card.cardapio.payments.PayPalService;
 import lombok.RequiredArgsConstructor;
-
 @RestController
 @RequestMapping("/api/paypal")
-@RequiredArgsConstructor
 @CrossOrigin("http://localhost:5173")
 public class PaypalController {
 
     private final PayPalService payPalService;
     private final PaymentRepository paymentRepository;
+    private final UserService userService;
+
+    public PaypalController(PayPalService payPalService, PaymentRepository paymentRepository, UserService userService) {
+        this.payPalService = payPalService;
+        this.paymentRepository = paymentRepository;
+        this.userService = userService;
+    }
 
     @PostMapping("/create-payment")
     public ResponseEntity<?> createPayment(@RequestBody PaymentDTO paymentDTO) {
@@ -45,8 +54,14 @@ public class PaypalController {
             }
 
             if (approvalUrl != null) {
+                Optional<Users> userOptional = userService.findById(paymentDTO.getUserId());
+                if (userOptional.isEmpty()) {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+                }
 
                 Paypal paymentEntity = getPaypal(payment, approvalUrl);
+                paymentEntity.setUsers(userOptional.get());
+
                 paymentRepository.save(paymentEntity);
 
                 String finalApprovalUrl = approvalUrl;
@@ -60,7 +75,6 @@ public class PaypalController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
-
     private static Paypal getPaypal(Payment payment, String approvalUrl) {
         Paypal paymentEntity = new Paypal();
         paymentEntity.setPaymentId(payment.getId());
@@ -74,8 +88,7 @@ public class PaypalController {
         paymentEntity.setApprovalUrl(approvalUrl);
         return paymentEntity;
     }
-
-    @PostMapping("/payment-complete")
+    @PatchMapping("/payment-complete")
     public ResponseEntity<?> completePayment(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
         try {
             Payment payment = payPalService.executePayment(paymentId, payerId);
@@ -91,3 +104,4 @@ public class PaypalController {
         }
     }
 }
+
