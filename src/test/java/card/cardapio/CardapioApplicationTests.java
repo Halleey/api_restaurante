@@ -74,6 +74,10 @@ public class CardapioApplicationTests {
                 .content(asJsonString(addressDTO))).andExpect(status().isOk());
     }
 
+
+
+
+
     private static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);

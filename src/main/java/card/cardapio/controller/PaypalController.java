@@ -5,11 +5,7 @@ import card.cardapio.entitie.Paypal;
 import card.cardapio.repositories.PaymentRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
@@ -79,5 +75,19 @@ public class PaypalController {
         return paymentEntity;
     }
 
-
+    @PostMapping("/payment-complete")
+    public ResponseEntity<?> completePayment(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
+        try {
+            Payment payment = payPalService.executePayment(paymentId, payerId);
+            if (payment.getState().equals("approved")) {
+                Paypal paymentEntity = getPaypal(payment, null); // Assuming approvalUrl is not needed here
+                paymentRepository.save(paymentEntity);
+                return ResponseEntity.ok("Payment approved");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Payment not approved");
+            }
+        } catch (PayPalRESTException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 }
