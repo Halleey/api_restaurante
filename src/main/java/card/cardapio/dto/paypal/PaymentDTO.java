@@ -1,5 +1,9 @@
 package card.cardapio.dto.paypal;
 
+import card.cardapio.dto.pedido.CartItemDTO;
+
+import java.util.List;
+
 public class PaymentDTO {
     private double total;
     private String currency;
@@ -9,6 +13,15 @@ public class PaymentDTO {
     private String cancelUrl;
     private String successUrl;
     private Long userId;
+    private List<CartItemDTO> cartItems;
+
+    public List<CartItemDTO> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<CartItemDTO> cartItems) {
+        this.cartItems = cartItems;
+    }
 
     public Long getUserId() {
         return userId;

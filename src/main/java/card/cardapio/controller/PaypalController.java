@@ -1,12 +1,16 @@
 package card.cardapio.controller;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import card.cardapio.dto.paypal.PaymentResponse;
+import card.cardapio.dto.pedido.CartItemDTO;
 import card.cardapio.entitie.Paypal;
+import card.cardapio.entitie.Pedido;
 import card.cardapio.entitie.Users;
 import card.cardapio.repositories.PaymentRepository;
+import card.cardapio.services.PedidoService;
 import card.cardapio.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,11 +29,12 @@ public class PaypalController {
     private final PayPalService payPalService;
     private final PaymentRepository paymentRepository;
     private final UserService userService;
-
-    public PaypalController(PayPalService payPalService, PaymentRepository paymentRepository, UserService userService) {
+    private final PedidoService pedidoService;
+    public PaypalController(PayPalService payPalService, PaymentRepository paymentRepository, UserService userService, PedidoService pedidoService) {
         this.payPalService = payPalService;
         this.paymentRepository = paymentRepository;
         this.userService = userService;
+        this.pedidoService = pedidoService;
     }
 
     @GetMapping("/completed-payments")
@@ -69,8 +74,21 @@ public class PaypalController {
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
                 }
 
+                Users user = userOptional.get();
+
+                // Criar e salvar pedidos
+                List<Pedido> pedidos = new ArrayList<>();
+                for (CartItemDTO item : paymentDTO.getCartItems()) {
+                    Pedido pedido = new Pedido();
+                    pedido.setTitle(item.getTitle());
+                    pedido.setPrice(item.getPrice());
+                    pedido.setUser(user);
+                    pedidos.add(pedido);
+                }
+                pedidoService.savePedidos(pedidos);
+
                 Paypal paymentEntity = getPaypal(payment, approvalUrl);
-                paymentEntity.setUsers(userOptional.get());
+                paymentEntity.setUsers(user);
 
                 paymentRepository.save(paymentEntity);
 

@@ -1,9 +1,11 @@
 package card.cardapio.entitie;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.parameters.P;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +38,12 @@ public class Users {
         this.email = email;
 
     }
-
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private List<Address> addresses = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Pedido> orderPedidos = new ArrayList<>();
 
 
 }
