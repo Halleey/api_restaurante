@@ -18,6 +18,11 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Crud "comida" somente para admin.
 - [x] Entity "Address".
 - [x] Associar um endereço ao usuário.
-- [x] Excluir um endereço. 
-- [ ] Recuperar senha do usuário.
-
+- [x] Excluir um endereço.
+- [x] Envio de emails 
+- [x] Recuperar senha do usuário.
+- [x] Gateway Paypal
+- [x] Status payment
+- [x] Persistir itens do carrinho
+- [x] Retornar a 'cozinha' os itens do carrinho
+       
