@@ -25,4 +25,4 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] Status payment
 - [x] Persistir itens do carrinho
 - [x] Retornar a 'cozinha' os itens do carrinho
-       
+- [x] Apagando pedidos
