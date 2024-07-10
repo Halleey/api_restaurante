@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-import card.cardapio.dto.paypal.PaymentResponse;
 import card.cardapio.dto.pedido.CartItemDTO;
 import card.cardapio.entitie.Paypal;
 import card.cardapio.entitie.Pedido;
@@ -20,7 +19,6 @@ import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 import card.cardapio.dto.paypal.PaymentDTO;
 import card.cardapio.payments.PayPalService;
-import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/paypal")
 @CrossOrigin("http://localhost:5173")
