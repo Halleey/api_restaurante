@@ -73,8 +73,18 @@ public class CardapioApplicationTests {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(addressDTO))).andExpect(status().isOk());
     }
+    @Test
+    public void getAddress() throws Exception {
+        AddressDTO addressDTO = new AddressDTO("Rua ABC", "123", 12L);
 
+        mockMvc.perform(get("/public/address")
+                        .header("userId", "12")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(addressDTO)))
+                .andExpect(status().isOk());
 
+        System.out.print(asJsonString(addressDTO));
+    }
 
 
 

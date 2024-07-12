@@ -13,6 +13,7 @@ public class Address {
     private String numero;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+
     private Users users;
 
     public void setId(long id) {

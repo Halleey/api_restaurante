@@ -2,7 +2,6 @@ package card.cardapio.controller;
 
 import card.cardapio.dto.address.AddressDTO;
 import card.cardapio.dto.user.UserRequestDto;
-import card.cardapio.entitie.Address;
 import card.cardapio.entitie.TokenReset;
 import card.cardapio.entitie.Users;
 import card.cardapio.services.AddressService;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-
 @RestController
 @RequestMapping("public")
 @CrossOrigin("http://localhost:5173")
@@ -36,6 +34,7 @@ public class UserController {
         this.emailService = emailService;
     }
 
+
     @PostMapping
     public void saveUser(@Validated @RequestBody UserRequestDto requestDTO) throws Exception {
         if (requestDTO.name().isEmpty() || requestDTO.lastName().isEmpty() || requestDTO.email().isEmpty() || requestDTO.password().isEmpty()) {
@@ -44,7 +43,6 @@ public class UserController {
             userService.saveUser(requestDTO);
         }
     }
-
     @PostMapping("/address")
     public void saveAddress(@RequestBody AddressDTO addressDTO, @RequestHeader("userId") Long userId) {
         addressService.saveAddress(userId, addressDTO);
@@ -56,8 +54,8 @@ public class UserController {
     }
 
     @GetMapping("/address")
-    public List<Address> getAllAddress() {
-        return addressService.getAddressAll();
+    public List<AddressDTO> getAddressesByUserId(@RequestHeader("userId") Long userId) {
+        return addressService.getAddressesByUserId(userId);
     }
 
     @PostMapping("/alterar")
