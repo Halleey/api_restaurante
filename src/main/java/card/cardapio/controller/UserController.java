@@ -54,8 +54,12 @@ public class UserController {
     }
 
     @GetMapping("/address")
-    public List<AddressDTO> getAddressesByUserId(@RequestHeader("userId") Long userId) {
-        return addressService.getAddressesByUserId(userId);
+    public ResponseEntity<List<AddressDTO>> getAddressesByUserId(@RequestHeader("userId") Long userId) {
+        List<AddressDTO> addresses = addressService.getAddressesByUserId(userId);
+        if (addresses.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 No Content se não houver endereços
+        }
+        return ResponseEntity.ok(addresses);
     }
 
     @PostMapping("/alterar")

@@ -29,9 +29,11 @@ public class PedidoService {
 
     private PedidoDto convertToDTO(Pedido pedido) {
         String userName = pedido.getUser().getName();
-        String userAddress = pedido.getUser().getAddresses().isEmpty() ? "" : pedido.getUser().getAddresses().get(0).toString();
+        String userAddress = pedido.getUser().getAddresses().isEmpty() ? "" : pedido.getUser().getAddresses().get(0).getAddress();
+
         return new PedidoDto(pedido.getId(), pedido.getTitle(), pedido.getPrice(), userName, userAddress);
     }
+
 
     @Transactional
     public void removePedidoById(Long pedidoId) {

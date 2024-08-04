@@ -1,20 +1,23 @@
 package card.cardapio.entitie;
 
 import jakarta.persistence.*;
-
 @Entity
 @Table(name = "pedido")
-public class Pedido
-{
+public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String title;
     private String price;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     public long getId() {
         return id;
@@ -46,5 +49,13 @@ public class Pedido
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

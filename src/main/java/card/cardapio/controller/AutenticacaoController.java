@@ -12,7 +12,6 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("/enter")
 @CrossOrigin("http://localhost:5173")
@@ -21,6 +20,10 @@ public class AutenticacaoController {
     private final JwtUserDetailsService detailsService;
     private final AuthenticationManager authenticationManager;
 
+    public AutenticacaoController(JwtUserDetailsService detailsService, AuthenticationManager authenticationManager) {
+        this.detailsService = detailsService;
+        this.authenticationManager = authenticationManager;
+    }
     @PostMapping("/auth")
     public ResponseEntity<?> autenticar(@RequestBody  UserLoginDto dto, HttpServletRequest request) {
         log.info("Processo de autenticação pelo login {}", dto.getName());
