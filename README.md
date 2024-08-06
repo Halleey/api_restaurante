@@ -16,9 +16,6 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 - [x] tokens jwt.
 - [x] Permissão de rotas.
 - [x] Crud "comida" somente para admin.
-- [x] Entity "Address".
-- [x] Associar um endereço ao usuário.
-- [x] Excluir um endereço.
 - [x] Envio de emails 
 - [x] Recuperar senha do usuário.
 - [x] Gateway Paypal
