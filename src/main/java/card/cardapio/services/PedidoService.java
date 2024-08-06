@@ -1,5 +1,4 @@
 package card.cardapio.services;
-
 import card.cardapio.dto.pedido.PedidoDto;
 import card.cardapio.entitie.Pedido;
 import card.cardapio.repositories.PedidoRepository;
@@ -30,8 +29,8 @@ public class PedidoService {
     private PedidoDto convertToDTO(Pedido pedido) {
         String userName = pedido.getUser().getName();
         String userAddress = pedido.getUser().getAddresses().isEmpty() ? "" : pedido.getUser().getAddresses().get(0).getAddress();
-
-        return new PedidoDto(pedido.getId(), pedido.getTitle(), pedido.getPrice(), userName, userAddress);
+        String userNumber = pedido.getUser().getAddresses().isEmpty() ? "": pedido.getUser().getAddresses().get(0).getNumero();
+        return new PedidoDto(pedido.getId(), pedido.getTitle(), pedido.getPrice(), userName, userAddress, userNumber );
     }
 
 

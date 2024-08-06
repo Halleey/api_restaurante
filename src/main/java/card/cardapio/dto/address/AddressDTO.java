@@ -5,7 +5,6 @@ public class AddressDTO {
     private String number;
     private Long userId;
 
-
     public AddressDTO() {
     }
 
@@ -35,7 +34,4 @@ public class AddressDTO {
         return number;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
-    }
 }

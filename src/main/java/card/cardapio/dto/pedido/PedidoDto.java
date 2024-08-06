@@ -5,15 +5,24 @@ public class PedidoDto {
     private String price;
     private String userName;
     private String userAddress;
+    private String userNumber;
 
-    public PedidoDto(long id, String title, String price, String userName, String userAddress) {
+    public PedidoDto(long id, String title, String price, String userName, String userAddress, String userNumber) {
         this.id = id;
         this.title = title;
         this.price = price;
         this.userName = userName;
         this.userAddress = userAddress;
+        this.userNumber =userNumber;
     }
 
+    public String getUserNumber() {
+        return userNumber;
+    }
+
+    public void setUserNumber(String userNumber) {
+        this.userNumber = userNumber;
+    }
 
     public long getId() {
         return id;
