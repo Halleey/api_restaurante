@@ -26,6 +26,7 @@ public class UserController {
     private final TokenRecovyPass tokenService;
     private final EmailService emailService;
 
+
     @Autowired
     public UserController(UserService userService, AddressService addressService, TokenRecovyPass tokenService, EmailService emailService) {
         this.userService = userService;
@@ -57,7 +58,7 @@ public class UserController {
     public ResponseEntity<List<AddressDTO>> getAddressesByUserId(@RequestHeader("userId") Long userId) {
         List<AddressDTO> addresses = addressService.getAddressesByUserId(userId);
         if (addresses.isEmpty()) {
-            return ResponseEntity.noContent().build(); // Retorna 204 No Content se não houver endereços
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(addresses);
     }

@@ -8,9 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Table(name = "foods")
 @Entity(name = "foods")
-@Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @EqualsAndHashCode(of = "id")
 public class Food {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,11 +17,71 @@ public class Food {
     private String image;
     private Integer price;
     private String description;
+    private String categoria;
+    private String categoriaGeral;
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public String getCategoriaGeral() {
+        return categoriaGeral;
+    }
+
+    public void setCategoriaGeral(String categoriaGeral) {
+        this.categoriaGeral = categoriaGeral;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 
     public Food(FoodRequestDTO data){
         this.image = data.image();
         this.price = data.price();
         this.title = data.title();
         this.description = data.description();
+        this.categoria = data.categoria();
+        this.categoriaGeral = data.categoriaGeral();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

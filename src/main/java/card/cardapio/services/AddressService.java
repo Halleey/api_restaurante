@@ -27,7 +27,7 @@ public class AddressService {
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
         Address address = new Address();
         address.setAddress(addressDTO.getAddress());
-        address.setNumero(addressDTO.getNumber());
+        address.setNumero(addressDTO.getNumero());
         address.setUsers(users);
         repository.save(address);
     }
@@ -49,7 +49,7 @@ public class AddressService {
     public void removeAddress(Long userId, AddressDTO addressDTO) {
         Users users = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
-        Address address = repository.findByUsersAndAddressAndNumero(users, addressDTO.getAddress(), addressDTO.getNumber());
+        Address address = repository.findByUsersAndAddressAndNumero(users, addressDTO.getAddress(), addressDTO.getNumero());
         repository.delete(address);
     }
 }

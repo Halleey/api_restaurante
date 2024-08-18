@@ -1,13 +1,13 @@
 package card.cardapio.controller;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+import card.cardapio.dto.address.AddressDTO;
 import card.cardapio.dto.pedido.CartItemDTO;
+import card.cardapio.entitie.Address;
 import card.cardapio.entitie.Paypal;
 import card.cardapio.entitie.Pedido;
 import card.cardapio.entitie.Users;
+import card.cardapio.repositories.AddressRepository;
 import card.cardapio.repositories.PaymentRepository;
 import card.cardapio.services.PedidoService;
 import card.cardapio.services.UserService;
@@ -28,11 +28,13 @@ public class PaypalController {
     private final PaymentRepository paymentRepository;
     private final UserService userService;
     private final PedidoService pedidoService;
-    public PaypalController(PayPalService payPalService, PaymentRepository paymentRepository, UserService userService, PedidoService pedidoService) {
+    private final AddressRepository addressRepository;
+    public PaypalController(PayPalService payPalService, PaymentRepository paymentRepository, UserService userService, PedidoService pedidoService, AddressRepository addressRepository) {
         this.payPalService = payPalService;
         this.paymentRepository = paymentRepository;
         this.userService = userService;
         this.pedidoService = pedidoService;
+        this.addressRepository = addressRepository;
     }
 
     @GetMapping("/completed-payments")
@@ -43,7 +45,6 @@ public class PaypalController {
         }
         return ResponseEntity.ok(completedPayments);
     }
-
     @PostMapping("/create-payment")
     public ResponseEntity<?> createPayment(@RequestBody PaymentDTO paymentDTO) {
         try {
@@ -67,14 +68,19 @@ public class PaypalController {
             }
 
             if (approvalUrl != null) {
-                Optional<Users> userOptional = userService.findById(paymentDTO.getUserId());
-                if (userOptional.isEmpty()) {
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+                Long userIdLong = null;
+                try {
+                    userIdLong = Long.parseLong(paymentDTO.getUserId());
+                } catch (NumberFormatException e) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid userId format.");
                 }
 
+                Optional<Users> userOptional = userService.findById(userIdLong);
+                if (userOptional.isEmpty()) {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
+                }
                 Users user = userOptional.get();
 
-                // Criar e salvar pedidos
                 List<Pedido> pedidos = new ArrayList<>();
                 for (CartItemDTO item : paymentDTO.getCartItems()) {
                     Pedido pedido = new Pedido();
@@ -84,16 +90,12 @@ public class PaypalController {
                     pedidos.add(pedido);
                 }
                 pedidoService.savePedidos(pedidos);
-
                 Paypal paymentEntity = getPaypal(payment, approvalUrl);
                 paymentEntity.setUsers(user);
 
                 paymentRepository.save(paymentEntity);
 
-                String finalApprovalUrl = approvalUrl;
-                return ResponseEntity.ok().body(new HashMap<String, String>() {{
-                    put("approvalUrl", finalApprovalUrl);
-                }});
+                return ResponseEntity.ok().body(Collections.singletonMap("approvalUrl", approvalUrl));
             } else {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("A resposta da API do PayPal não contém approval_url.");
             }
@@ -101,6 +103,8 @@ public class PaypalController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
+
     private static Paypal getPaypal(Payment payment, String approvalUrl) {
         Paypal paymentEntity = new Paypal();
         paymentEntity.setPaymentId(payment.getId());

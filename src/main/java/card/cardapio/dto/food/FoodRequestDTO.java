@@ -1,4 +1,9 @@
 package card.cardapio.dto.food;
-public record FoodRequestDTO(String title, String image, Integer price, String description
-) {
-}
+public record FoodRequestDTO(
+        String title,
+        Integer price,
+        String image,
+        String description,
+        String categoria,
+        String categoriaGeral
+) {}
