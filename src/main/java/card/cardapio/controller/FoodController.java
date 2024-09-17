@@ -9,7 +9,6 @@ import card.cardapio.dto.food.FoodRequestDTO;
 import card.cardapio.dto.food.FoodResponseDTO;
 import card.cardapio.entitie.Food;
 
-
 @RestController
 @RequestMapping("food")
 @CrossOrigin("http://localhost:5173")

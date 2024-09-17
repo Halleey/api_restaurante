@@ -19,6 +19,18 @@ public class Pedido {
     @JoinColumn(name = "address_id")
     private Address address;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "payment_id")
+    private Paypal paypal;
+
+    public Paypal getPaypal() {
+        return paypal;
+    }
+
+    public void setPaypal(Paypal paypal) {
+        this.paypal = paypal;
+    }
+
     public long getId() {
         return id;
     }

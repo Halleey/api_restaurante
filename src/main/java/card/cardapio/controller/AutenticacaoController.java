@@ -1,15 +1,19 @@
 package card.cardapio.controller;
-import card.cardapio.dto.user.UserLoginDto;
-import card.cardapio.jwt.JwtToken;
-import card.cardapio.jwt.JwtUserDetailsService;
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import card.cardapio.dto.user.UserLoginDto;
+import card.cardapio.jwt.JwtToken;
+import card.cardapio.jwt.JwtUserDetailsService;
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
@@ -24,6 +28,7 @@ public class AutenticacaoController {
         this.detailsService = detailsService;
         this.authenticationManager = authenticationManager;
     }
+
     @PostMapping("/auth")
     public ResponseEntity<?> autenticar(@RequestBody  UserLoginDto dto, HttpServletRequest request) {
         log.info("Processo de autenticação pelo login {}", dto.getName());

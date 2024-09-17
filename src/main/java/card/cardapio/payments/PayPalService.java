@@ -78,4 +78,9 @@ public class PayPalService {
         return  repository.findAllCompletedPayments();
    }
 
+    public Payment getPaymentDetails(String paymentId) throws PayPalRESTException {
+        // Recupera os detalhes do pagamento com base no paymentId
+        Payment payment = Payment.get(apiContext, paymentId);
+        return payment;
+    }
 }
