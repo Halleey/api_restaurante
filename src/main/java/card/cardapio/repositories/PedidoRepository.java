@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
@@ -15,4 +17,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     @Transactional
     @Query("DELETE FROM Pedido p WHERE p.id = :pedidoId")
     void deleteById(@Param("pedidoId") Long pedidoId);
+
+    @Query("SELECT p FROM Pedido p JOIN p.paypal py WHERE py.state = 'approved'")
+    List<Pedido> findPedidosWithApprovedPayment();
+
 }

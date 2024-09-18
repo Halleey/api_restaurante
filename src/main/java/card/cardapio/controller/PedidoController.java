@@ -15,13 +15,15 @@ public class PedidoController {
         this.service = service;
     }
 
-    @GetMapping
-    public List<PedidoDto> getAll() {
-        return service.getAll();
+
+    @GetMapping()
+    public List<PedidoDto> getPedidosWithApprovedPayment() {
+        return service.getPedidosWithApprovedPayment();
     }
+
+
     @DeleteMapping("/{pedidoId}")
     public void deletePedidoById(@PathVariable Long pedidoId) {
         service.removePedidoById(pedidoId);
     }
-
 }

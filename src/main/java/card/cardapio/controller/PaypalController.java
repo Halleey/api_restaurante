@@ -126,13 +126,14 @@ public class PaypalController {
         paymentEntity.setApprovalUrl(approvalUrl);
         return paymentEntity;
     }
+
     @Autowired
     private APIContext apiContext;
 
     @PatchMapping("/payment-complete")
     public ResponseEntity<String> completePayment(@RequestParam String paymentId, @RequestParam String PayerID) {
         try {
-            // Buscar o pagamento pelo paymentId
+
             Payment payment = Payment.get(apiContext, paymentId);
 
 
@@ -142,10 +143,20 @@ public class PaypalController {
 
             Payment executedPayment = payment.execute(apiContext, paymentExecution);
 
-            // Verificar o estado do pagamento
+
             if ("approved".equals(executedPayment.getState())) {
-                // Atualizar o banco de dados e retornar o status "Payment approved"
-                return ResponseEntity.ok("Payment approved");
+
+                Optional<Paypal> paymentFromDb = paymentRepository.findByPaymentId(paymentId);
+
+                if (paymentFromDb.isPresent()) {
+                    Paypal paypal = paymentFromDb.get();
+                    paypal.setState("approved");
+                    paymentRepository.save(paypal);
+                    return ResponseEntity.ok("Payment approved");
+                } else {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Payment record not found in database");
+                }
+
             } else {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Payment not approved");
             }
