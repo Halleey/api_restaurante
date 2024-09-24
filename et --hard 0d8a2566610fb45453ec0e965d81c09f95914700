@@ -1,0 +1,280 @@
+[33mcommit 5f04ebc143e83fed502f8b3660511f58eec74ae8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: hallyson <aparecidohallyson@gmail.com>
+Date:   Mon Sep 23 11:51:17 2024 -0300
+
+    receive alternative address
+
+[33mcommit 0d8a2566610fb45453ec0e965d81c09f95914700[m
+Author: hallyson <aparecidohallyson@gmail.com>
+Date:   Wed Sep 18 17:38:25 2024 -0300
+
+    fixed session admin
+
+[33mcommit f2c458d8450fa0de0bb2825678c7f2f872dcef75[m
+Author: hallyson <aparecidohallyson@gmail.com>
+Date:   Tue Sep 17 18:59:30 2024 -0300
+
+    hards changes to Paypal Api
+
+[33mcommit ea540f5129b926dcb66bcdee363eb3276598575d[m
+Author: hallyson <aparecidohallyson@gmail.com>
+Date:   Sun Aug 18 16:44:49 2024 -0300
+
+    filter
+
+[33mcommit d6a9530c9900522e95dc890ccc83879f132ad62e[m
+Author: hallyson <aparecidohallyson@gmail.com>
+Date:   Tue Aug 6 14:51:22 2024 -0300
+
+    --
+
+[33mcommit 3ed57bf3ddce980ee38dc22db8d834e4594721d1[m
+Author: Hallyson <137704301+Halleey@users.noreply.github.com>
+Date:   Tue Aug 6 14:50:10 2024 -0300
+
+    Update README.md
+
+[33mcommit 466f051f69d18d6af5e9bb91d62ad6462be3afaf[m
+Author: hallyson <aparecidohallyson@gmail.com>
+Date:   Sun Aug 4 14:57:14 2024 -0300
+
+    fixed json
+
+[33mcommit 66607efd6f20921589e2aaa32aeb7dfa46fa7bfe[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Fri Jul 12 01:36:16 2024 -0300
+
+     fixed recursive json address
+
+[33mcommit 64dca7a993c05dad1ecaa06e325d95022662cbaf[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Wed Jul 10 00:01:28 2024 -0300
+
+    readme update
+
+[33mcommit 12a7d63dc7f589115535c33ce617b99ef3e6905c[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Wed Jul 10 00:00:25 2024 -0300
+
+    apagando pedidos
+
+[33mcommit 569a2230571f55058e90726d84958bbddf6a5c08[m
+Author: Hallyson <137704301+Halleey@users.noreply.github.com>
+Date:   Tue Jul 9 14:04:36 2024 -0300
+
+    Update README.md
+
+[33mcommit bd565a627379700ac6630de85323a6c0a6c9dd9e[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Tue Jul 9 14:01:08 2024 -0300
+
+     return cart items
+
+[33mcommit ddd20f3e7a9c3a72b92ee437c1faa4d8e2c32a8a[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Mon Jul 8 17:14:06 2024 -0300
+
+     return payments success
+
+[33mcommit a1b52320d89a0a12760f1ecbdfbba24a2c6b18d3[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Mon Jul 8 15:56:07 2024 -0300
+
+     users payment fixed bugs
+
+[33mcommit 574723b5f9ca91f7a8ca380b7655d8a3a59e18e9[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Mon Jul 8 14:30:24 2024 -0300
+
+    payment status update
+
+[33mcommit fc7bfa12b66e47e68c05d24391aca80ef8fed10b[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Sat Jul 6 20:51:17 2024 -0300
+
+    testes unitarios
+
+[33mcommit 33bfaa002538f7cb5c1753e6a7522286387ba98f[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Fri Jul 5 21:41:48 2024 -0300
+
+    persistindo transações
+
+[33mcommit 06d0e34721a5bff74fec3679d7969d40c9efe508[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Fri Jul 5 16:41:52 2024 -0300
+
+    Paypal payment setup complete
+
+[33mcommit 009a961a7c7f740d9ad0aa81220afa4e2911c5f3[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Thu Jul 4 13:00:33 2024 -0300
+
+    Controller payment via Paypal
+
+[33mcommit d61a2864a99995ca1ae8230302ede72714ccfe1e[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Thu Jul 4 12:23:24 2024 -0300
+
+    paypal configuration
+
+[33mcommit ac9c5dc0b993dcb4cf19dabdb4323e8cd24a69d9[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Tue Jul 2 16:56:49 2024 -0300
+
+    alter password
+
+[33mcommit 89462ffcfcc0ed3bfbf3b9999492b505c790d431[m
+Merge: ed05476 3409c9c
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Tue Jul 2 16:55:49 2024 -0300
+
+    Merge branch 'master' of https://github.com/Halleey/api_restaurante
+
+[33mcommit ed054767f11d1553f53c8beeb9a069890ef7d1f0[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Tue Jul 2 16:54:47 2024 -0300
+
+    alter password
+
+[33mcommit 3409c9c4f1a704f343a7b6b9b97909d1d9ff9eb0[m
+Author: Hallyson <137704301+Halleey@users.noreply.github.com>
+Date:   Mon Jun 24 12:30:05 2024 -0300
+
+    Update application.properties
+
+[33mcommit 3271089d707fccb3e5ce52c67990844fed79dd40[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Sun Jun 23 12:12:56 2024 -0300
+
+    recovery password and send email
+
+[33mcommit 5aa25d88d860fc087e36ea261275b6b499cc31da[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Tue Jun 11 15:53:53 2024 -0300
+
+    final settings to save address
+
+[33mcommit f84d166307ebf363c1e13514d83a3dcd4ea41d6a[m
+Author: Hallyson <137704301+Halleey@users.noreply.github.com>
+Date:   Wed May 29 03:12:35 2024 -0300
+
+    Update README.md
+
+[33mcommit 0ae8d85fdfd5585fd6ff0dc8ecee568bfec48916[m
+Author: Hallyson <137704301+Halleey@users.noreply.github.com>
+Date:   Wed May 29 03:11:11 2024 -0300
+
+    Update README.md
+
+[33mcommit 11a0621a28ce44aeb2d38a90bffc9428dc8d46f9[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Wed May 29 03:09:14 2024 -0300
+
+    add method 'delet' addres
+
+[33mcommit 2ff022dc79608bcfed555b4c6c6bbfed52a135ab[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Tue May 28 15:17:38 2024 -0300
+
+    save address
+
+[33mcommit 77e9c9cc6d19007b8c0ee4866a182bd07a649252[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Sat May 25 18:38:27 2024 -0300
+
+    excluding table
+
+[33mcommit f3285611be2a1ffbe73aec04d71b2d9539d9e12f[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Mon May 13 14:22:24 2024 -0300
+
+    token receives user id
+
+[33mcommit 6b324f4d547c47e67f145fa4899e14c0ea94beef[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Mon May 6 16:53:47 2024 -0300
+
+    remover usuário  ligado a mesa
+
+[33mcommit ee44fb81d9f7fc47c66e15a31a474ba9ab581a7a[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Mon May 6 15:19:42 2024 -0300
+
+    Associating a table with a user
+
+[33mcommit 41ba7300347765db01b9133c2f3d6bd89b0a3809[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Sun May 5 16:33:36 2024 -0300
+
+    bug fixes and enhancements
+
+[33mcommit f6c906e787a60452ee1e7c9434d017b3704b10d0[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Sun May 5 13:05:39 2024 -0300
+
+    all table available
+
+[33mcommit 21880f9d830bbb6d28fbd5b1aff53ff7e0e8dbf6[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Sun May 5 12:33:46 2024 -0300
+
+    comments service
+
+[33mcommit ebd480c3ed843348115e8beaeb90acb5f4cc279c[m
+Author: Hallyson <137704301+Halleey@users.noreply.github.com>
+Date:   Sat May 4 14:02:05 2024 -0300
+
+    Update README.md
+
+[33mcommit 8b55d1e2cf23dcc15e46d2968b1d9dbbafe94a0c[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Sat May 4 11:51:17 2024 -0300
+
+    desassociar mesa de um usuário
+
+[33mcommit eebde9535df70fea23a315fbd68b450da64334f6[m
+Merge: 04eb9f5 92c774e
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Sat May 4 11:48:20 2024 -0300
+
+    Merge branch 'master' of https://github.com/Halleey/api_restaurante
+
+[33mcommit 04eb9f5ce27ba65434a2e3ec7501be40218e8d87[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Sat May 4 11:48:07 2024 -0300
+
+    Associate users with a table
+
+[33mcommit 92c774ecbdbcf83640553b84a0dc918f2e8b4c10[m
+Author: Hallyson <137704301+Halleey@users.noreply.github.com>
+Date:   Sat May 4 11:46:34 2024 -0300
+
+    Update README.md
+
+[33mcommit 1e18fc7b8958727cc44800fd47c8a260f7bfb95b[m
+Author: Hallyson <137704301+Halleey@users.noreply.github.com>
+Date:   Sat May 4 11:44:22 2024 -0300
+
+    Create README.md
+
+[33mcommit e654a09b93cf31d6a5ad45c6147348516361d51b[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Fri May 3 14:41:52 2024 -0300
+
+    entity Mesa
+
+[33mcommit 3121fb15f22d49c9c7fc519a76e91a2e9b4ec063[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Tue Apr 30 18:51:09 2024 -0300
+
+     fixed bugs
+
+[33mcommit b24a4b994419ef07bbb23f17712138cfd959ddd2[m
+Author: Hallyson <aparecidohallyson@gmail.com>
+Date:   Fri Mar 29 14:02:28 2024 -0300
+
+    finish class jwt
+
+[33mcommit a6e2fe743d31027535120f5db582a8c9ef2fcb02[m
+Autho
