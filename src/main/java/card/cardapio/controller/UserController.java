@@ -4,7 +4,6 @@ import card.cardapio.dto.address.AddressDTO;
 import card.cardapio.dto.user.UserRequestDto;
 import card.cardapio.entitie.TokenReset;
 import card.cardapio.entitie.Users;
-import card.cardapio.services.AddressService;
 import card.cardapio.services.EmailService;
 import card.cardapio.services.TokenRecovyPass;
 import card.cardapio.services.UserService;
@@ -22,19 +21,23 @@ import java.util.Map;
 @Validated
 public class UserController {
     private final UserService userService;
-    private final AddressService addressService;
+
     private final TokenRecovyPass tokenService;
     private final EmailService emailService;
 
 
     @Autowired
-    public UserController(UserService userService, AddressService addressService, TokenRecovyPass tokenService, EmailService emailService) {
+    public UserController(UserService userService,  TokenRecovyPass tokenService, EmailService emailService) {
         this.userService = userService;
-        this.addressService = addressService;
+
         this.tokenService = tokenService;
         this.emailService = emailService;
     }
 
+    @GetMapping
+    public List<Users> getUsers() {
+        return userService.getUsers();
+    }
 
     @PostMapping
     public void saveUser(@Validated @RequestBody UserRequestDto requestDTO) throws Exception {
@@ -44,24 +47,7 @@ public class UserController {
             userService.saveUser(requestDTO);
         }
     }
-    @PostMapping("/address")
-    public void saveAddress(@RequestBody AddressDTO addressDTO, @RequestHeader("userId") Long userId) {
-        addressService.saveAddress(userId, addressDTO);
-    }
 
-    @DeleteMapping("/address")
-    public void removeAddress(@RequestBody AddressDTO addressDTO, @RequestHeader("userId") Long userId) {
-        addressService.removeAddress(userId, addressDTO);
-    }
-
-    @GetMapping("/address")
-    public ResponseEntity<List<AddressDTO>> getAddressesByUserId(@RequestHeader("userId") Long userId) {
-        List<AddressDTO> addresses = addressService.getAddressesByUserId(userId);
-        if (addresses.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(addresses);
-    }
 
     @PostMapping("/alterar")
     public ResponseEntity<String> forgotPassword(@RequestBody Map<String, String> requestBody) {

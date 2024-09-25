@@ -21,7 +21,7 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
     @Query("SELECT p FROM Pedido p JOIN p.paypal py WHERE py.state = 'approved'")
     List<Pedido> findPedidosWithApprovedPayment();
 
-    @Query("SELECT p FROM Pedido p WHERE p.optionalAddress IS NOT NULL AND p.optionalNumber IS NOT NULL")
+    @Query("SELECT p FROM Pedido p WHERE p.optionalAddress IS NOT NULL AND p.optionalAddress <> '' AND p.optionalNumber IS NOT NULL AND p.optionalNumber <> ''")
     List<Pedido> findPedidosWithOptionalAddressAndNumber();
 
 }

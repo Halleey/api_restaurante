@@ -26,6 +26,7 @@ public class WebConfig {
                                 .requestMatchers(HttpMethod.GET, "/api/paypal/completed-payments").permitAll()
                                 .requestMatchers(HttpMethod.POST,"/public/**").permitAll()
                                 .requestMatchers(HttpMethod.PATCH,"/public/**").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/public/**").permitAll()
                                 .requestMatchers(HttpMethod.GET, "/pedidos/**").hasAuthority("ROLE_ADMIN")
                                 .requestMatchers(HttpMethod.DELETE, "/pedidos/**").hasAuthority("ROLE_ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/food/**").hasAuthority("ROLE_ADMIN")

@@ -16,7 +16,7 @@ public class Pedido {
     @JoinColumn(name = "user_id")
     private Users user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "payment_id")
     private Paypal paypal;
 

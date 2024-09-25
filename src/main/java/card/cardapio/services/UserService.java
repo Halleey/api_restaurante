@@ -3,31 +3,29 @@ package card.cardapio.services;
 import card.cardapio.dto.user.UserRequestDto;
 import card.cardapio.entitie.TokenReset;
 import card.cardapio.entitie.Users;
-import card.cardapio.repositories.AddressRepository;
 import card.cardapio.repositories.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UserService {
     private final UserRepository repository;
     private final BCryptPasswordEncoder passwordEncoder;
-    private final AddressRepository addressRepository;
     private final  EmailService emailService;
     private final TokenRecovyPass tokenService;
     @Autowired
     public UserService(UserRepository repository,
                        BCryptPasswordEncoder passwordEncoder,
-                       AddressRepository addressRepository,
                        EmailService emailService,TokenRecovyPass tokenService)
     {
         this.repository = repository;
         this.passwordEncoder = passwordEncoder;
-        this.addressRepository = addressRepository;
         this.emailService = emailService;
         this.tokenService = tokenService;
     }
@@ -105,6 +103,11 @@ public class UserService {
         repository.save(user);
         tokenService.deleteToken(tokenReset);
     }
+
+    public List<Users> getUsers() {
+        return  repository.findAll().stream().toList();
+    }
+
     public Optional<Users> findById(Long userId) {
         return  repository.findById(userId);
     }

@@ -4,7 +4,6 @@ import card.cardapio.dto.pedido.CartItemDTO;
 import card.cardapio.entitie.Paypal;
 import card.cardapio.entitie.Pedido;
 import card.cardapio.entitie.Users;
-import card.cardapio.repositories.AddressRepository;
 import card.cardapio.repositories.PaymentRepository;
 import card.cardapio.services.PedidoService;
 import card.cardapio.services.UserService;
@@ -29,14 +28,13 @@ public class PaypalController {
     private final PaymentRepository paymentRepository;
     private final UserService userService;
     private final PedidoService pedidoService;
-    private final AddressRepository addressRepository;
 
-    public PaypalController(PayPalService payPalService, PaymentRepository paymentRepository, UserService userService, PedidoService pedidoService, AddressRepository addressRepository) {
+    public PaypalController(PayPalService payPalService, PaymentRepository paymentRepository, UserService userService, PedidoService pedidoService) {
         this.payPalService = payPalService;
         this.paymentRepository = paymentRepository;
         this.userService = userService;
         this.pedidoService = pedidoService;
-        this.addressRepository = addressRepository;
+
     }
 
     @GetMapping("/completed-payments")

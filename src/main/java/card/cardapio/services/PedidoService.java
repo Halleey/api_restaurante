@@ -20,8 +20,8 @@ public class PedidoService {
         return repository.saveAll(pedidos);
     }
 
-    // Buscar pedidos com pagamento aprovado
-    public List<PedidoDto> getPedidosWithApprovedPayment() {
+    // Buscar pedidos com pagamento aprovado e informações do usuário
+    public List<PedidoDto> getPedidosWithApprovedPaymentAndUserDetails() {
         return repository.findPedidosWithApprovedPayment().stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());

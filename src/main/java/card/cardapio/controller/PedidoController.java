@@ -16,9 +16,10 @@ public class PedidoController {
     }
 
 
+    //correções para rotas, corrigir amanhã....
     @GetMapping()
     public List<PedidoDto> getPedidosWithApprovedPayment() {
-        return service.getPedidosWithApprovedPayment();
+        return service.getPedidosWithApprovedPaymentAndUserDetails();
     }
 
     @GetMapping("/optional")
