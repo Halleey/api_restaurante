@@ -10,18 +10,32 @@ public class Pedido {
 
     private String title;
     private String price;
-
+    private String optionalAddress;
+    private String optionalNumber;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;
 
-    @ManyToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "payment_id")
     private Paypal paypal;
+
+
+    public String getOptionalAddress() {
+        return optionalAddress;
+    }
+
+    public void setOptionalAddress(String optionalAddress) {
+        this.optionalAddress = optionalAddress;
+    }
+
+    public String getOptionalNumber() {
+        return optionalNumber;
+    }
+
+    public void setOptionalNumber(String optionalNumber) {
+        this.optionalNumber = optionalNumber;
+    }
 
     public Paypal getPaypal() {
         return paypal;
@@ -61,13 +75,5 @@ public class Pedido {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 }

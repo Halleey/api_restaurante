@@ -27,28 +27,44 @@ public class Users {
     private String lastName;
     private String password;
     private String email;
+    private String address;
+    private String number;
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, length = 25)
     private Role role = Role.ROLE_CLIENTE;
 
-
-
     public enum Role {
         ROLE_ADMIN, ROLE_CLIENTE
     }
-    public Users(String name, String lastName, String password, String email) {
+    public Users(String name, String lastName, String password, String email, String address, String number) {
         this.name = name;
         this.lastName = lastName;
         this.password = password;
+        this.address = address;
+        this.number = number;
         this.email = email;
 
     }
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-    private List<Address> addresses = new ArrayList<>();
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pedido> orderPedidos = new ArrayList<>();
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public Long getId() {
         return id;
@@ -66,13 +82,6 @@ public class Users {
         this.orderPedidos = orderPedidos;
     }
 
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<Address> addresses) {
-        this.addresses = addresses;
-    }
 
     public Role getRole() {
         return role;

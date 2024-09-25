@@ -6,14 +6,36 @@ public class PedidoDto {
     private String userName;
     private String userAddress;
     private String userNumber;
+    private String optionalAddress;
+    private String optionalNumber;
 
-    public PedidoDto(long id, String title, String price, String userName, String userAddress, String userNumber) {
+
+
+    public PedidoDto(long id, String title, String price, String userName, String userAddress, String userNumber, String optionalAddress, String optionalNumber) {
         this.id = id;
         this.title = title;
         this.price = price;
         this.userName = userName;
         this.userAddress = userAddress;
         this.userNumber =userNumber;
+        this.optionalNumber = optionalNumber;
+        this.optionalAddress = optionalAddress;
+    }
+
+    public String getOptionalAddress() {
+        return optionalAddress;
+    }
+
+    public void setOptionalAddress(String optionalAddress) {
+        this.optionalAddress = optionalAddress;
+    }
+
+    public String getOptionalNumber() {
+        return optionalNumber;
+    }
+
+    public void setOptionalNumber(String optionalNumber) {
+        this.optionalNumber = optionalNumber;
     }
 
     public String getUserNumber() {

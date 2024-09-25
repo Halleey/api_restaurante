@@ -3,6 +3,24 @@ package card.cardapio.dto.pedido;
 public class CartItemDTO {
     private String title;
     private String price;
+    private String optionalAddress;
+    private String optionalNumber;
+
+    public String getOptionalAddress() {
+        return optionalAddress;
+    }
+
+    public void setOptionalAddress(String optionalAddress) {
+        this.optionalAddress = optionalAddress;
+    }
+
+    public String getOptionalNumber() {
+        return optionalNumber;
+    }
+
+    public void setOptionalNumber(String optionalNumber) {
+        this.optionalNumber = optionalNumber;
+    }
 
     public String getTitle() {
         return title;

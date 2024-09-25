@@ -37,7 +37,9 @@ public class UserService {
                 requestDTO.name(),
                 requestDTO.lastName(),
                 encryptedPassword,
-                requestDTO.email()
+                requestDTO.email(),
+                requestDTO.address(),
+                requestDTO.number()
         );
 
 

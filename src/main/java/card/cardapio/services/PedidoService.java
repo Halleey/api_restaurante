@@ -20,7 +20,6 @@ public class PedidoService {
         return repository.saveAll(pedidos);
     }
 
-
     // Buscar pedidos com pagamento aprovado
     public List<PedidoDto> getPedidosWithApprovedPayment() {
         return repository.findPedidosWithApprovedPayment().stream()
@@ -28,18 +27,22 @@ public class PedidoService {
                 .collect(Collectors.toList());
     }
 
+    public List<PedidoDto> getOptionalPedidos() {
+        return repository.findPedidosWithOptionalAddressAndNumber().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
 
     private PedidoDto convertToDTO(Pedido pedido) {
         String userName = pedido.getUser().getName();
-        String userAddress = pedido.getUser().getAddresses().isEmpty() ? "" : pedido.getUser().getAddresses().get(0).getAddress();
-        String userNumber = pedido.getUser().getAddresses().isEmpty() ? "" : pedido.getUser().getAddresses().get(0).getNumero();
-        return new PedidoDto(pedido.getId(), pedido.getTitle(), pedido.getPrice(), userName, userAddress, userNumber);
-    }
+        String userAddress = pedido.getUser().getAddress();
+        String userNumber = pedido.getUser().getNumber();
 
+        return new PedidoDto(pedido.getId(), pedido.getTitle(), pedido.getPrice(), userName, userAddress, userNumber, pedido.getOptionalAddress(), pedido.getOptionalNumber());
+    }
 
     @Transactional
     public void removePedidoById(Long pedidoId) {
         repository.deleteById(pedidoId);
     }
 }
-

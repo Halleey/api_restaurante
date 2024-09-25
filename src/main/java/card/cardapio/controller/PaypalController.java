@@ -1,6 +1,5 @@
 package card.cardapio.controller;
 import java.util.*;
-
 import card.cardapio.dto.pedido.CartItemDTO;
 import card.cardapio.entitie.Paypal;
 import card.cardapio.entitie.Pedido;
@@ -92,17 +91,30 @@ public class PaypalController {
                 // Criar e associar os pedidos ao pagamento
                 List<Pedido> pedidos = new ArrayList<>();
                 for (CartItemDTO item : paymentDTO.getCartItems()) {
+                    System.out.println(paymentDTO);
+                    System.out.println("Item Optional Address: " + paymentDTO.getOptionalAddress());
+                    System.out.println("Item Optional Number: " + paymentDTO.getOptionalNumber() + "DEBUG");
+
+
                     Pedido pedido = new Pedido();
+                    pedido.setOptionalAddress(paymentDTO.getOptionalAddress());
+                    pedido.setOptionalNumber(paymentDTO.getOptionalNumber());
                     pedido.setTitle(item.getTitle());
                     pedido.setPrice(item.getPrice());
                     pedido.setUser(user);
-                    pedido.setPaypal(paymentEntity);  // Associar o pedido ao pagamento
+
+
+                    System.out.println(pedido.getOptionalAddress() + "DEBUG");
+                    System.out.println(pedido.getOptionalNumber() + "DEBUG");
+
+
+                    pedido.setPaypal(paymentEntity);
                     pedidos.add(pedido);
                 }
 
                 // Salvar os pedidos e o pagamento
                 paymentEntity.setPedidos(pedidos);
-                paymentRepository.save(paymentEntity); // Isso salva os pedidos junto com o pagamento (cascade)
+                paymentRepository.save(paymentEntity);
 
                 return ResponseEntity.ok().body(Collections.singletonMap("approvalUrl", approvalUrl));
             } else {

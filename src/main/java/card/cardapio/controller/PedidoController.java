@@ -21,6 +21,11 @@ public class PedidoController {
         return service.getPedidosWithApprovedPayment();
     }
 
+    @GetMapping("/optional")
+    public  List<PedidoDto>  getOptionalPedido() {
+        return  service.getOptionalPedidos();
+    }
+
 
     @DeleteMapping("/{pedidoId}")
     public void deletePedidoById(@PathVariable Long pedidoId) {

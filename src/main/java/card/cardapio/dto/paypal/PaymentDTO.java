@@ -12,6 +12,24 @@ public class PaymentDTO {
     private String userId;
     private List<CartItemDTO> cartItems;
     private Long addressId;
+    private String optionalAddress;
+    private String optionalNumber;
+
+    public String getOptionalAddress() {
+        return optionalAddress;
+    }
+
+    public void setOptionalAddress(String optionalAddress) {
+        this.optionalAddress = optionalAddress;
+    }
+
+    public String getOptionalNumber() {
+        return optionalNumber;
+    }
+
+    public void setOptionalNumber(String optionalNumber) {
+        this.optionalNumber = optionalNumber;
+    }
 
     public Long getAddressId() {
         return addressId;
@@ -92,4 +110,27 @@ public class PaymentDTO {
     public void setCurrency(String currency) {
         this.currency = currency;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("PaymentDTO{");
+        sb.append("total=").append(total);
+        sb.append(", currency='").append(currency).append('\'');
+        sb.append(", method='").append(method).append('\'');
+        sb.append(", intent='").append(intent).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", cancelUrl='").append(cancelUrl).append('\'');
+        sb.append(", successUrl='").append(successUrl).append('\'');
+        sb.append(", userId='").append(userId).append('\'');
+        sb.append(", cartItems=").append(cartItems);
+        sb.append(", addressId=").append(addressId);
+        sb.append(", optionalAddress='").append(optionalAddress).append('\'');
+        sb.append(", optionalNumber='").append(optionalNumber).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
+
+
 }
+
+
