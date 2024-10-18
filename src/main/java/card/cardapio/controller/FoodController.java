@@ -32,4 +32,9 @@ public class FoodController {
             return foodService.findAll();
         }
     }
+
+    @DeleteMapping("/{foodId}")
+    public void deleteById(@PathVariable long foodId) {
+        foodService.removeFood(foodId);
+    }
 }

@@ -29,6 +29,7 @@ public class Users {
     private String email;
     private String address;
     private String number;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, length = 25)
     private Role role = Role.ROLE_CLIENTE;

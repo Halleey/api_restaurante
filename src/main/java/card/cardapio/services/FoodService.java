@@ -38,5 +38,8 @@ public class FoodService {
                 .toList();
     }
 
+    public void removeFood(Long id) {
+       repository.deleteById(id);
+    }
 
 }
