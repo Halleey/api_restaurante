@@ -1,7 +1,10 @@
 package card.cardapio.dto.food;
+
+import java.math.BigDecimal;
+
 public record FoodRequestDTO(
         String title,
-        Integer price,
+        BigDecimal price,
         String image,
         String description,
         String categoria,

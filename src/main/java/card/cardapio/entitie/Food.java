@@ -8,6 +8,8 @@ import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Table(name = "foods")
 @Entity(name = "foods")
 @NoArgsConstructor
@@ -17,7 +19,7 @@ public class Food {
     private Long id;
     private String title;
     private String image;
-    private Integer price;
+    private BigDecimal price;
     private String description;
     private String categoria;
     private String categoriaGeral;
@@ -63,11 +65,12 @@ public class Food {
         this.description = description;
     }
 
-    public Integer getPrice() {
+
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
