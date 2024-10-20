@@ -1,6 +1,5 @@
 package card.cardapio.controller;
 
-import card.cardapio.dto.address.AddressDTO;
 import card.cardapio.dto.user.UserRequestDto;
 import card.cardapio.entitie.TokenReset;
 import card.cardapio.entitie.Users;
@@ -46,6 +45,11 @@ public class UserController {
         } else {
             userService.saveUser(requestDTO);
         }
+    }
+
+    @PostMapping("/alert")
+    public void finishedRequestService(@RequestParam  String email) {
+        userService.sendRequestFinished(email);
     }
 
 

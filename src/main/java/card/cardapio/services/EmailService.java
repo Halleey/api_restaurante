@@ -28,6 +28,4 @@ public class EmailService {
             return "erro ao enviar o email" + e.getLocalizedMessage();
         }
     }
-
-
 }

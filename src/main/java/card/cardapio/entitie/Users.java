@@ -1,11 +1,9 @@
 package card.cardapio.entitie;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.parameters.P;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +35,7 @@ public class Users {
     public enum Role {
         ROLE_ADMIN, ROLE_CLIENTE
     }
-    public Users(String name, String lastName, String password, String email, String address, String number) {
+    public Users(String name, String lastName, String password, String address, String number, String email) {
         this.name = name;
         this.lastName = lastName;
         this.password = password;

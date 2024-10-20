@@ -37,8 +37,8 @@ public class PedidoService {
         String userName = pedido.getUser().getName();
         String userAddress = pedido.getUser().getAddress();
         String userNumber = pedido.getUser().getNumber();
-
-        return new PedidoDto(pedido.getId(), pedido.getTitle(), pedido.getPrice(), userName, userAddress, userNumber, pedido.getOptionalAddress(), pedido.getOptionalNumber());
+        String userEmail = pedido.getUser().getEmail();
+        return new PedidoDto(pedido.getId(), pedido.getTitle(), pedido.getPrice(), userName, userAddress, userNumber, pedido.getOptionalAddress(), pedido.getOptionalNumber(), userEmail);
     }
 
     @Transactional

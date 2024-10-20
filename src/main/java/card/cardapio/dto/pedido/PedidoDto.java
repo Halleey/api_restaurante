@@ -8,10 +8,12 @@ public class PedidoDto {
     private String userNumber;
     private String optionalAddress;
     private String optionalNumber;
+    private String userEmail;
 
 
-
-    public PedidoDto(long id, String title, String price, String userName, String userAddress, String userNumber, String optionalAddress, String optionalNumber) {
+    public PedidoDto(long id, String title, String price, String userName,
+                     String userAddress, String userNumber, String optionalAddress,
+                     String optionalNumber, String userEmail) {
         this.id = id;
         this.title = title;
         this.price = price;
@@ -20,6 +22,15 @@ public class PedidoDto {
         this.userNumber =userNumber;
         this.optionalNumber = optionalNumber;
         this.optionalAddress = optionalAddress;
+        this.userEmail = userEmail;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getOptionalAddress() {

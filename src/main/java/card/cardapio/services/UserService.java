@@ -35,9 +35,9 @@ public class UserService {
                 requestDTO.name(),
                 requestDTO.lastName(),
                 encryptedPassword,
-                requestDTO.email(),
                 requestDTO.address(),
-                requestDTO.number()
+                requestDTO.number(),
+                requestDTO.email()
         );
 
 
@@ -64,6 +64,16 @@ public class UserService {
     public Users findByEmail(String email) {
         return repository.findByEmail(email);
     }
+
+
+    public void sendRequestFinished(String email) {
+
+        String destinatario = email;
+        String assunto= "Pedido no serviço Mesa digital";
+        String mensagem = "Seu pedido já foi finalizado e saiu para entrega";
+        emailService.enviarEmail(destinatario, assunto, mensagem);
+    }
+
     public void iniciarRecuperacaoSenha(String email) {
         Users user = findByEmail(email);
         if (user == null) {
