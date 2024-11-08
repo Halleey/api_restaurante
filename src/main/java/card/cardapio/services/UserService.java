@@ -1,5 +1,6 @@
 package card.cardapio.services;
 
+import card.cardapio.dto.address.AddressDTO;
 import card.cardapio.dto.user.UserRequestDto;
 import card.cardapio.entitie.TokenReset;
 import card.cardapio.entitie.Users;
@@ -10,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.management.GarbageCollectorMXBean;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +31,15 @@ public class UserService {
         this.tokenService = tokenService;
     }
 
+    public void changeAddress(Long userId, AddressDTO addressDTO) {
+        Users user = repository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
+
+        user.setAddress(addressDTO.getAddress());
+        user.setNumber(addressDTO.getNumber());
+
+        repository.save(user); // Salva as alterações no banco
+    }
 
     public void saveUser(UserRequestDto requestDTO) {
         String encryptedPassword = passwordEncoder.encode(requestDTO.password());
@@ -50,7 +59,6 @@ public class UserService {
 
         emailService.enviarEmail(destinatario, assunto, mensagem);
     }
-
 
     @Transactional(readOnly = true)
     public Users buscarPorNome(String name) {
@@ -80,7 +88,6 @@ public class UserService {
         emailService.enviarEmail(destinatario, assunto, mensagem);
     }
 
-
     public void iniciarRecuperacaoSenha(String email) {
         Users user = findByEmail(email);
         if (user == null) {
@@ -96,8 +103,6 @@ public class UserService {
 
         emailService.enviarEmail(destinatario, assunto, mensagem);
     }
-
-
 
     public void alterPassword(String email, String token, String novaSenha) throws Exception {
         Users user = repository.findByEmail(email);

@@ -1,11 +1,13 @@
 package card.cardapio.controller;
 
+import card.cardapio.dto.address.AddressDTO;
 import card.cardapio.dto.user.UserRequestDto;
 import card.cardapio.entitie.TokenReset;
 import card.cardapio.entitie.Users;
 import card.cardapio.services.EmailService;
 import card.cardapio.services.TokenRecovyPass;
 import card.cardapio.services.UserService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,11 +35,22 @@ public class UserController {
         this.emailService = emailService;
     }
 
+    @PatchMapping("/alter-address")
+    public ResponseEntity<String> changeAddress(@RequestParam Long userId, @RequestBody AddressDTO addressDTO) {
+        try {
+            userService.changeAddress(userId, addressDTO);
+            return ResponseEntity.ok("Endereço atualizado com sucesso!");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar o endereço");
+        }
+    }
+
     @GetMapping
     public List<Users> getUsers() {
         return userService.getUsers();
     }
-
     @PostMapping
     public void saveUser(@Validated @RequestBody UserRequestDto requestDTO) throws Exception {
         if (requestDTO.name().isEmpty() || requestDTO.lastName().isEmpty() || requestDTO.email().isEmpty() || requestDTO.password().isEmpty()) {
@@ -62,7 +75,6 @@ public class UserController {
         }
 
         TokenReset resetToken = tokenService.createToken(user);
-
 
         String subject = "Recuperação de Senha";
         String message = "Olá " + user.getName() + ",\n\n"

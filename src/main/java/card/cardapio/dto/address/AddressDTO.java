@@ -1,22 +1,22 @@
 package card.cardapio.dto.address;
 public class AddressDTO {
     private String address;
-    private String numero;
+    private String number;
     private Long userId;
 
     public AddressDTO() {}
 
-    public AddressDTO(String address, String numero, Long userId) {
+    public AddressDTO(String address, String number, Long userId) {
         this.address = address;
-        this.numero = numero;
+        this.number = number;
         this.userId = userId;
     }
 
     public String getAddress() { return address; }
     public void setAddress(String address) { this.address = address; }
 
-    public String getNumero() { return numero; }
-    public void setNumero(String numero) { this.numero = numero; }
+    public String getNumber() { return number; }
+    public void setNumber(String numero) { this.number = numero; }
 
     public Long getUserId() { return userId; }
     public void setUserId(Long userId) { this.userId = userId; }
