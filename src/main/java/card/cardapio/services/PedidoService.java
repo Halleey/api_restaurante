@@ -33,12 +33,16 @@ public class PedidoService {
                 .collect(Collectors.toList());
     }
 
+
+
     private PedidoDto convertToDTO(Pedido pedido) {
         String userName = pedido.getUser().getName();
         String userAddress = pedido.getUser().getAddress();
         String userNumber = pedido.getUser().getNumber();
         String userEmail = pedido.getUser().getEmail();
-        return new PedidoDto(pedido.getId(), pedido.getTitle(), pedido.getPrice(), userName, userAddress, userNumber, pedido.getOptionalAddress(), pedido.getOptionalNumber(), userEmail);
+        return new PedidoDto(pedido.getId(), pedido.getTitle(), pedido.getPrice(), userName,
+                userAddress, userNumber, pedido.getOptionalAddress()
+                , pedido.getOptionalNumber(), userEmail);
     }
 
     @Transactional

@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.lang.management.GarbageCollectorMXBean;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,8 @@ public class UserService {
         this.emailService = emailService;
         this.tokenService = tokenService;
     }
+
+
     public void saveUser(UserRequestDto requestDTO) {
         String encryptedPassword = passwordEncoder.encode(requestDTO.password());
         Users userData = new Users(
@@ -40,7 +43,6 @@ public class UserService {
                 requestDTO.email()
         );
 
-
         repository.save(userData);
         String destinatario = requestDTO.email();
         String assunto = "Bem-vindo ao nosso sistema!";
@@ -48,6 +50,8 @@ public class UserService {
 
         emailService.enviarEmail(destinatario, assunto, mensagem);
     }
+
+
     @Transactional(readOnly = true)
     public Users buscarPorNome(String name) {
         return repository.findByName(name)
@@ -61,6 +65,8 @@ public class UserService {
     public Optional<Users> getId(Long id) {
         return repository.findById(id);
     }
+
+
     public Users findByEmail(String email) {
         return repository.findByEmail(email);
     }
@@ -73,6 +79,7 @@ public class UserService {
         String mensagem = "Seu pedido já foi finalizado e saiu para entrega";
         emailService.enviarEmail(destinatario, assunto, mensagem);
     }
+
 
     public void iniciarRecuperacaoSenha(String email) {
         Users user = findByEmail(email);
@@ -89,6 +96,9 @@ public class UserService {
 
         emailService.enviarEmail(destinatario, assunto, mensagem);
     }
+
+
+
     public void alterPassword(String email, String token, String novaSenha) throws Exception {
         Users user = repository.findByEmail(email);
         if (user == null) {
