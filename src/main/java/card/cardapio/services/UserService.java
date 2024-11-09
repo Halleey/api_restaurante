@@ -31,15 +31,7 @@ public class UserService {
         this.tokenService = tokenService;
     }
 
-    public void changeAddress(Long userId, AddressDTO addressDTO) {
-        Users user = repository.findById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
 
-        user.setAddress(addressDTO.getAddress());
-        user.setNumber(addressDTO.getNumber());
-
-        repository.save(user); // Salva as alterações no banco
-    }
 
     public void saveUser(UserRequestDto requestDTO) {
         String encryptedPassword = passwordEncoder.encode(requestDTO.password());
@@ -136,4 +128,25 @@ public class UserService {
     public Optional<Users> findById(Long userId) {
         return  repository.findById(userId);
     }
+
+    public void changeAddress(Long userId, AddressDTO addressDTO) {
+        Users user = repository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
+
+        user.setAddress(addressDTO.getAddress());
+        user.setNumber(addressDTO.getNumber());
+
+        repository.save(user); // Salva as alterações no banco
+    }
+
+    public AddressDTO getAddress(Long userId) {
+        Users user = repository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
+
+        AddressDTO addressDTO = new AddressDTO();
+        addressDTO.setAddress(user.getAddress());
+        addressDTO.setNumber(user.getNumber());
+        return addressDTO;
+    }
+
 }

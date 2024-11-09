@@ -26,7 +26,6 @@ public class UserController {
     private final TokenRecovyPass tokenService;
     private final EmailService emailService;
 
-
     @Autowired
     public UserController(UserService userService,  TokenRecovyPass tokenService, EmailService emailService) {
         this.userService = userService;
@@ -46,6 +45,19 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar o endereço");
         }
     }
+
+    @GetMapping("/my-address")
+    public ResponseEntity<AddressDTO> addressUser(@RequestParam Long userId) {
+        try {
+            AddressDTO address = userService.getAddress(userId);
+            return ResponseEntity.ok(address);
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
 
     @GetMapping
     public List<Users> getUsers() {
