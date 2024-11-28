@@ -1,5 +1,4 @@
 package card.cardapio.services;
-
 import card.cardapio.dto.address.AddressDTO;
 import card.cardapio.dto.user.UserRequestDto;
 import card.cardapio.entitie.TokenReset;
@@ -21,6 +20,7 @@ public class UserService {
     private final  EmailService emailService;
     private final TokenRecovyPass tokenService;
     @Autowired
+
     public UserService(UserRepository repository,
                        BCryptPasswordEncoder passwordEncoder,
                        EmailService emailService,TokenRecovyPass tokenService)
@@ -30,8 +30,6 @@ public class UserService {
         this.emailService = emailService;
         this.tokenService = tokenService;
     }
-
-
 
     public void saveUser(UserRequestDto requestDTO) {
         String encryptedPassword = passwordEncoder.encode(requestDTO.password());
@@ -70,7 +68,6 @@ public class UserService {
     public Users findByEmail(String email) {
         return repository.findByEmail(email);
     }
-
 
     public void sendRequestFinished(String email) {
 
@@ -142,7 +139,7 @@ public class UserService {
     public AddressDTO getAddress(Long userId) {
         Users user = repository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
-
+        //inicializa o objeto da classe para que ele possa representar os itens que estão chegando
         AddressDTO addressDTO = new AddressDTO();
         addressDTO.setAddress(user.getAddress());
         addressDTO.setNumber(user.getNumber());

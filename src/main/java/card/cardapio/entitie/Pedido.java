@@ -1,6 +1,9 @@
 package card.cardapio.entitie;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "pedido")
 public class Pedido {
@@ -12,6 +15,23 @@ public class Pedido {
     private String price;
     private String optionalAddress;
     private String optionalNumber;
+    private LocalDateTime localDateTime;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.localDateTime == null) {
+            this.localDateTime = LocalDateTime.now();
+        }
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
+    }
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;

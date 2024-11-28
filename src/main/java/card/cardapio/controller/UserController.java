@@ -58,7 +58,6 @@ public class UserController {
         }
     }
 
-
     @GetMapping
     public List<Users> getUsers() {
         return userService.getUsers();
@@ -110,5 +109,4 @@ public class UserController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
 }

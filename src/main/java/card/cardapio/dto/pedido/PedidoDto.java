@@ -1,4 +1,7 @@
 package card.cardapio.dto.pedido;
+
+import java.time.LocalDateTime;
+
 public class PedidoDto {
     private long id;
     private String title;
@@ -9,11 +12,13 @@ public class PedidoDto {
     private String optionalAddress;
     private String optionalNumber;
     private String userEmail;
+    private LocalDateTime localDateTime;
+
 
 
     public PedidoDto(long id, String title, String price, String userName,
                      String userAddress, String userNumber, String optionalAddress,
-                     String optionalNumber, String userEmail) {
+                     String optionalNumber, String userEmail, LocalDateTime localDateTime) {
         this.id = id;
         this.title = title;
         this.price = price;
@@ -23,6 +28,8 @@ public class PedidoDto {
         this.optionalNumber = optionalNumber;
         this.optionalAddress = optionalAddress;
         this.userEmail = userEmail;
+        this.localDateTime = localDateTime;
+
     }
 
     public String getUserEmail() {
@@ -95,5 +102,14 @@ public class PedidoDto {
 
     public void setUserAddress(String userAddress) {
         this.userAddress = userAddress;
+    }
+
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
     }
 }

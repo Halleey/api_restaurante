@@ -4,6 +4,8 @@ import card.cardapio.entitie.Pedido;
 import card.cardapio.repositories.PedidoRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +17,7 @@ public class PedidoService {
     public PedidoService(PedidoRepository repository) {
         this.repository = repository;
     }
+
 
     public List<Pedido> savePedidos(List<Pedido> pedidos) {
         return repository.saveAll(pedidos);
@@ -40,9 +43,18 @@ public class PedidoService {
         String userAddress = pedido.getUser().getAddress();
         String userNumber = pedido.getUser().getNumber();
         String userEmail = pedido.getUser().getEmail();
-        return new PedidoDto(pedido.getId(), pedido.getTitle(), pedido.getPrice(), userName,
-                userAddress, userNumber, pedido.getOptionalAddress()
-                , pedido.getOptionalNumber(), userEmail);
+        return new PedidoDto(
+                pedido.getId(),
+                pedido.getTitle(),
+                pedido.getPrice(),
+                userName,
+                userAddress,
+                userNumber,
+                pedido.getOptionalAddress(),
+                pedido.getOptionalNumber(),
+                userEmail,
+                pedido.getLocalDateTime() // Inclui o horário do pedido no DTO
+        );
     }
 
     @Transactional
